@@ -1,0 +1,16 @@
+# by www.bejson.com 
+# default by azure aks
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: default
+  selfLink: /apis/storage.k8s.io/v1/storageclasses/default
+  labels: {kubernetes.io/cluster-service: 'true'}
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"storage.k8s.io/v1beta1","kind":"StorageClass","metadata":{"annotations":{"storageclass.beta.kubernetes.io/is-default-class":"true"},"labels":{"kubernetes.io/cluster-service":"true"},"name":"default"},"parameters":{"cachingmode":"ReadOnly","kind":"Managed","storageaccounttype":"Standard_LRS"},"provisioner":"kubernetes.io/azure-disk"}
+    storageclass.beta.kubernetes.io/is-default-class: 'true'
+provisioner: kubernetes.io/azure-disk
+parameters: {cachingmode: ReadOnly, kind: Managed, storageaccounttype: Standard_LRS}
+reclaimPolicy: Delete
+volumeBindingMode: Immediate

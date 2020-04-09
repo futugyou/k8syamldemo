@@ -1,0 +1,38 @@
+---
+# kubectl attach initnginx -c  initnginx
+apiVersion: v1
+kind: Pod
+metadata:
+  name: initnginx
+  labels:
+    name: initnginx
+spec:
+  initContainers:
+   - name: install-nginx
+     image: busybox
+     command:
+     - wget
+     - "-O"
+     - "/work-dir/index.html"
+     - http://kubernetes.io
+     volumeMounts:
+     - name: workdir
+       mountPath: "/work-dir"
+  containers:
+  - name: initnginx
+    image: nginx
+    resources:
+      limits:
+        memory: "128Mi"
+        cpu: "100m"
+    ports:
+      - containerPort: 80
+        hostPort: 80
+    volumeMounts:
+     - name: workdir
+       mountPath: /usr/share/nginx/html
+  dnsPolicy: Default
+  volumes:
+    - name: workdir
+      emptyDir: {}
+

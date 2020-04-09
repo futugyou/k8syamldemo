@@ -1,0 +1,36 @@
+---
+# kubectl create -f cm-appvars-pod.yaml
+# kubectl get pods --show-all
+# kubectl logs cm-test-pod
+apiVersion: v1
+kind: Pod
+metadata:
+    name: cm-test-pod
+    labels:
+      name: cm-test-pod
+spec:
+    restartPolicy: Never
+    containers:
+     - name: cm-test
+       image: busybox
+       command: ["/bin/sh","-c","env | grep APP"]
+       resources:
+        limits:
+          memory: "128Mi"
+          cpu: "100m"
+       ports:
+         - containerPort: 8080
+       env:
+         - name: APPLOGLEVEL
+           valueFrom:
+            configMapKeyRef:
+             name: cm-appvars
+             key: apploglevel
+         - name: APPDATADIR
+           valueFrom:
+            configMapKeyRef:
+             name: cm-appvars
+             key: appdatadir
+       #envFrom:
+        #- configMapRef:
+           #name: cm-appvars

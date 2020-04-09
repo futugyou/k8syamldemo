@@ -1,0 +1,21 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: labelness-service
+spec:
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8080
+
+---
+apiVersion: v1
+kind: Endpoints
+metadata:
+ name: labelness-service
+subsets:
+  - addresses:
+    - ip: 10.244.0.69
+    ports:
+    - port: 8080

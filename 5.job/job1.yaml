@@ -1,0 +1,20 @@
+---
+# kubectl get jobs -l jobgroup=jobexample
+apiVersion: batch/v1
+kind: Job
+metadata:
+ name: process-item-a 
+ labels:
+  jobgroup: jobexample
+spec:
+ template:
+  metadata:
+   name: jobexample
+   labels:
+    jobgroup: jobexample
+  spec:
+   containers:
+    - name: c
+      image: busybox
+      command: ["sh", "-c","echo Processing item a && sleep 5"]
+   restartPolicy: Never

@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: command-demo
+  labels:
+    name: command-demo
+    purpose: demonstrate-command
+spec:
+  containers:
+  - name: command-demo
+    image: debian
+    resources:
+      limits:
+        memory: "128Mi"
+        cpu: "100m"
+    command: ["printenv"]
+    args: ["HOSTNAME", "KUBERNETES_PORT"]
+  restartPolicy: OnFailure

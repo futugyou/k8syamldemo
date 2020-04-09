@@ -1,0 +1,43 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: with-node-affinity
+  labels:
+    name: with-node-affinity
+spec:
+  containers:
+  - name: with-node-affinity
+    image: gcr.io/google_containers/pause:2.0
+    resources:
+      limits:
+        memory: "128Mi"
+        cpu: "100m"
+    ports:
+      - containerPort: 80
+  affinity:
+   nodeAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      nodeSelectorTerms:
+        - matchExpressions:
+          - key: beta.kubernetes.io/arch
+            operator:  In
+            values:
+            - amd64
+    preferredDuringSchedulingIgnoredDuringExecution:
+      - preference:
+          matchExpressions:
+          - key: disk-type
+            operator: In
+            values:
+            - ssd
+        weight: 1
+   podAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+    - labelSelector:         
+         matchExpression:
+         - key: security
+           operator:  In
+           values:
+           - S1
+      topologyKey: kubernetes.io/hostname
+

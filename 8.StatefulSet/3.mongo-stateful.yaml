@@ -1,0 +1,55 @@
+---
+# kubectl get pod -l role=mongo
+# kubectl get pvc 
+# kubectl get pod mongo-0 -o yaml
+# kubectl exec -it mongo-0 -- mongo
+## rs.status()
+### mongodb://mongo-0.mongo, mongo-1.mongo, mongo-2.mongo:27017/dbname_?
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mongo
+spec:
+  selector:
+    matchLabels:
+      role: mongo # has to match .spec.template.metadata.labels
+  serviceName: "mongo"
+  replicas: 2 # by default is 1
+  template:
+    metadata:
+      labels:
+        role: mongo # has to match .spec.selector.matchLabels
+    spec:
+      terminationGracePeriodSeconds: 30
+      containers:
+      - name: mongo
+        image: mongo
+        command:
+          - mongod
+          - "--replSet"
+          - rs0
+          - "--smallfiles"
+          - "--noprealloc"
+        ports:
+        - containerPort: 27017
+        volumeMounts:
+        - name: mongo-persistent-storage
+          mountPath: /data/db
+      - name: mongo-sidecar
+        image: cvallance/mongo-k8s-sidecar
+        env:
+        - name: MONGO_SIDECAR_POD_LABELS
+          value: "role=mongo"
+        - name: KUBERNETES_MONGO_SERVICE_NAME
+          value: "mongo"
+  volumeClaimTemplates:
+  - metadata:
+      name: mongo-persistent-storage
+      annotations:
+        volume.beta.kubernetes.io/storage-class: "managed-premium"
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      #storageClassName: "managed-premium"
+      resources:
+        requests:
+          storage: 1Gi
