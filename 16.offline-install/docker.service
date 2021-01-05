@@ -6,6 +6,7 @@ Wants=network-online.target
 
 [Service]
 Type=notify
+Environment="PATH=/opt/ok8s/bin:/bin:/sbin:/usr/bin:/usr/sbin"
 # the default is not to use systemd for cgroups because the delegate issues still
 # exists and systemd currently does not support the cgroup feature set required
 # for containers run by docker

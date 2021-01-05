@@ -7,10 +7,12 @@ echo '将docker.service 移到/etc/systemd/system/ 目录...'
 cp docker.service /etc/systemd/system/
 echo '添加文件权限...'
 chmod +x /etc/systemd/system/docker.service
+#chmod 644 /etc/systemd/system/docker.service
 echo '重新加载配置文件...'
 systemctl daemon-reload
 echo '启动docker...'
 systemctl start docker
+#sudo service start docker
 echo '设置开机自启...'
 systemctl enable docker.service
 echo 'docker安装成功...'
