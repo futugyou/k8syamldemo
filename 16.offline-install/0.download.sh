@@ -3,7 +3,8 @@ echo 'Get Docker Binaries File'
 wget  https://download.docker.com/linux/static/stable/x86_64/docker-20.10.1.tgz
 echo 'Get Kubernetes Server Binaries File'
 wget https://dl.k8s.io/v1.20.0/kubernetes-server-linux-amd64.tar.gz
-
+echo 'Get Etcd Server Binaries File'
+wget https://github.com/etcd-io/etcd/releases/download/v3.4.13/etcd-v3.4.13-linux-amd64.tar.gz
 
 #!/bin/bash
 # use other version of kubeadm to pull and export 'kube-images'
