@@ -23,4 +23,7 @@ wget https://github.com/goharbor/harbor/releases/download/v2.1.2/harbor-offline-
 tar -xvf harbor-offline-installer-v2.1.2.tgz
 cp harbor/harbor.yml.tmpl harbor/harbor.yml
 sed -i "s/hostname: reg.mydomain.com/hostname: ${USER} /g" harbor/harbor.yml
+sed -i "s/\/your\/certificate\/path/\/etc\/docker\/certs.d\/${USER}.com\/${USER}.com.cert /g" harbor/harbor.yml
+sed -i "s/\/your\/private\/key\/path/\/etc\/docker\/certs.d\/${USER}.com\/${USER}.com.key /g" harbor/harbor.yml
+
 harbor/install.sh
