@@ -1,3 +1,4 @@
+#### Refer to [here](https://jimmysong.io/kubernetes-handbook/practice/install-kubernetes-on-centos.html) for the operation steps 
 ## 1. Preparation Stage
 ### 1.1 Prepare Docker Installation File
 - Prepare docker.service 

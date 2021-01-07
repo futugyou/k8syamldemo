@@ -1,4 +1,8 @@
 #!/bin/sh
+echo 'about tsl'
+wget https://pkg.cfssl.org/R1.2/cfssl_linux-amd64
+wget https://pkg.cfssl.org/R1.2/cfssljson_linux-amd64
+wget https://pkg.cfssl.org/R1.2/cfssl-certinfo_linux-amd64
 echo 'Get Docker Binaries File'
 wget  https://download.docker.com/linux/static/stable/x86_64/docker-20.10.1.tgz
 echo 'Get Kubernetes Server Binaries File'
