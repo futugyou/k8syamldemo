@@ -59,13 +59,18 @@ echo "Docker Compose Installation done"
 HARBORVERSION=$(curl -s https://github.com/goharbor/harbor/releases/latest/download 2>&1 | grep -Po [0-9]+\.[0-9]+\.[0-9]+)
 curl -s https://api.github.com/repos/goharbor/harbor/releases/latest | grep browser_download_url | grep online | cut -d '"' -f 4 | wget -qi -
 tar xvf harbor-online-installer-v$HARBORVERSION.tgz
-cd harbor
-cp harbor.yml.tmpl harbor.yml
-sed -i "s/https:/# https:/g" harbor.yml
-sed -i "s/port: 443/# port: 443/g" harbor.yml
-sed -i "s/certificate: \/your\/certificate\/path/# certificate: \/your\/certificate\/path/g" harbor.yml
-sed -i "s/private_key: \/your\/private\/key\/path/# private_key: \/your\/private\/key\/path/g" harbor.yml
+ 
+cp ./harbor/harbor.yml.tmpl ./harbor/harbor.yml
+sh harbor-tls.sh $IPorFQDN
+# sed -i "s/https:/# https:/g" ./harbor/harbor.yml
+# sed -i "s/port: 443/# port: 443/g" ./harbor/harbor.yml
+# sed -i "s/certificate: \/your\/certificate\/path/# certificate: \/your\/certificate\/path/g" ./harbor/harbor.yml
+# sed -i "s/private_key: \/your\/private\/key\/path/# private_key: \/your\/private\/key\/path/g" ./harbor/harbor.yml
 
-sed -i "s/reg.mydomain.com/$IPorFQDN/g" harbor.yml
-./install.sh --with-clair --with-chartmuseum
+
+sed -i "s/\/your\/certificate\/path/\/etc\/docker\/certs.d\/$IPorFQDN.com\/$IPorFQDN.com.cert /g" ./harbor/harbor.yml
+sed -i "s/\/your\/private\/key\/path/\/etc\/docker\/certs.d\/$IPorFQDN.com\/$IPorFQDN.com.key /g" ./harbor/harbor.yml
+sed -i "s/reg.mydomain.com/$IPorFQDN/g" ./harbor/harbor.yml
+
+./harbor/install.sh --with-clair --with-chartmuseum
 echo -e "Harbor Installation Complete \n\nPlease log out and log in or run the command 'newgrp docker' to use Docker without sudo\n\nLogin to your harbor instance:\n docker login -u admin -p Harbor12345 $IPorFQDN"
