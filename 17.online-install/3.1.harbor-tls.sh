@@ -2,14 +2,14 @@
 
 org=$(hostname)
 
-echo 'harbor Generate a Certificate Authority Certificate'
+echo -e 'harbor Generate a Certificate Authority Certificate'
 openssl genrsa -out ca.key 4096
 openssl req -x509 -new -nodes -sha512 -days 3650 \
  -subj "/C=CN/ST=Beijing/L=Beijing/O=$org/OU=Personal/CN=$1.com" \
  -key ca.key \
  -out ca.crt
 
-echo 'harbor Generate a Server Certificate'
+echo -e 'harbor Generate a Server Certificate'
 openssl genrsa -out $1.com.key 4096
 openssl req -sha512 -new \
     -subj "/C=CN/ST=Beijing/L=Beijing/O=$org/OU=Personal/CN=$1.com" \
