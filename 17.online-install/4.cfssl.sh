@@ -1,17 +1,15 @@
 #!/bin/bash
-echo 'cfssl'
+echo 'install cfssl'
 wget https://pkg.cfssl.org/R1.2/cfssl_linux-amd64
 chmod +x cfssl_linux-amd64
-mv cfssl_linux-amd64 /usr/local/bin/cfssl
+mv -f cfssl_linux-amd64 /usr/local/bin/cfssl
 
-echo 'cfssljson'
 wget https://pkg.cfssl.org/R1.2/cfssljson_linux-amd64
 chmod +x cfssljson_linux-amd64
-mv cfssljson_linux-amd64 /usr/local/bin/cfssljson
+mv -f cfssljson_linux-amd64 /usr/local/bin/cfssljson
 
-echo 'cfssl-certinfo'
 wget https://pkg.cfssl.org/R1.2/cfssl-certinfo_linux-amd64
 chmod +x cfssl-certinfo_linux-amd64
-mv cfssl-certinfo_linux-amd64 /usr/local/bin/cfssl-certinfo
+mv -f cfssl-certinfo_linux-amd64 /usr/local/bin/cfssl-certinfo
 
 export PATH=/usr/local/bin:$PATH

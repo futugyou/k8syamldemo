@@ -28,11 +28,11 @@ openssl x509 -req -sha512 -days 3650 \
     -out $1.com.crt
 
 mkdir -p /data/cert/
-cp $1.com.crt /data/cert/
-cp $1.com.key /data/cert/
+mv -f $1.com.crt /data/cert/
+mv -f $1.com.key /data/cert/
 openssl x509 -inform PEM -in $1.com.crt -out $1.com.cert
 
 mkdir -p /etc/docker/certs.d/$1.com/
-cp $1.com.cert /etc/docker/certs.d/$1.com/
-cp $1.com.key /etc/docker/certs.d/$1.com/
-cp ca.crt /etc/docker/certs.d/$1.com/
+mv -f $1.com.cert /etc/docker/certs.d/$1.com/
+mv -f $1.com.key /etc/docker/certs.d/$1.com/
+mv -f ca.crt /etc/docker/certs.d/$1.com/
