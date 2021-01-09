@@ -27,3 +27,5 @@ sh ./5.createCA.sh
 sh ./6.kubernetes-csr.sh
 sh ./7.admin-csr.sh
 sh ./8.kube-proxy-csr.sh
+
+sh ./9.kubelet.1.20.sh
