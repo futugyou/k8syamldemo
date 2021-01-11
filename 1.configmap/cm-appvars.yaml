@@ -2,7 +2,7 @@
 #kubectl config set-context --current --namespace=default
 #kubectl create -f cm-appvars.yaml
 #kubectl get configmap
-#kebuctl describe configmap cm-appvars
+#kubectl describe configmap cm-appvars
 #kubectl get configmap cm-appvars -o yaml
 apiVersion: v1
 kind: ConfigMap
