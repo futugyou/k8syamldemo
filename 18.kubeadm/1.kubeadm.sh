@@ -27,9 +27,19 @@ sudo apt-get install -y kubelet kubeadm kubectl
 sudo apt-mark hold kubelet kubeadm kubectl 
 
 kubeadm init --pod-network-cidr=10.244.0.0/16  --apiserver-advertise-address=$IPorFQDN  
+#------if 509 do this
+# sudo apt-get update   !
+# sudo apt-get upgrade  !
+# sudo su
+# kubeadm reset
+# kubeadm init --pod-network-cidr=10.244.0.0/16  --apiserver-advertise-address=$IPorFQDN  
+# exit
+# mkdir -p $HOME/.kube
+# sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+# sudo chown $(id -u):$(id -g) $HOME/.kube/config
+# kubectl get nodes
+#------509 NED
 
 mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
-
-export KUBECONFIG=/etc/kubernetes/admin.conf

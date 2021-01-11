@@ -1,7 +1,7 @@
 #!/bin/bash 
 
 
-//sudo kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+#sudo kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
 
 
 tee kube-flannel.yml >/dev/null <<EOF
@@ -229,4 +229,4 @@ spec:
       - name: flannel-cfg
         configMap:
           name: kube-flannel-cfg
-EOF          
+EOF

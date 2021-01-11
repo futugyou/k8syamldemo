@@ -7,9 +7,3 @@ LxRunOffline.exe list
 # wsl --shutdown Ubuntu-20.04
 # LxRunOffline.exe move -n Ubuntu-20.04 -d E:\wsl
 
-/etc/wsl.conf
-
-[network]
-generateHosts = false
-#fixed ip
-sudo vi /etc/hosts
