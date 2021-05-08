@@ -1,3 +1,4 @@
+####  win10 docker-desktop wsl2
 ```
 docker run -d -p 49001:8080 -p 49000:50000 -v /d/docker/jekins:/var/jenkins_home --name myjenkins jenkins/jenkins
 
@@ -13,5 +14,21 @@ https://mirrors.tuna.tsinghua.edu.cn/jenkins/updates/update-center.json
 use NATPP
 
 //insert jenkins plugins
-CloudBees Credentials 、GitHub API Plugin、SSH Credentials Plugin、Git client plugin、SCM API、Mailer Plugin 、Plain Credentials Plugin 、GIT plugin、GitHub Plugin
+CloudBees Credentials Plugin
+GitHub API Plugin
+SSH Credentials Plugin
+Git client plugin
+SCM API Plugin
+Mailer Plugin
+Plain Credentials Plugin
+GIT plugin
+GitHub Plugin
+Docker
+Kubernetes
+
+// http://localhost:49001/config/  GitHub Server
+
+
+// http://localhost:49001/configureClouds/ docker 
+Expose daemon on tcp://localhost:2375 without TLS in docker desktop -> General
 ```
