@@ -25,10 +25,20 @@ GIT plugin
 GitHub Plugin
 Docker
 Kubernetes
+Publish over SSH
 
 // http://localhost:49001/config/  GitHub Server
 
 
 // http://localhost:49001/configureClouds/ docker 
-Expose daemon on tcp://localhost:2375 without TLS in docker desktop -> General
+open docker 2376 oprt
+if window, it can be config in 'docker desktop -> General' , check 'Expose daemon on tcp://localhost:2375 without TLS'
+linux , vi /lib/systemd/system/docker.service (perhaps usr/lib/systemd/system/docker.service)
+Add -H tcp://0.0.0.0:2376 -H unix:///var/run/docker.sock to ExecStart
+systemctl daemon-reload
+systemctl restart docker
+
+if use TLS  see create_tls_certs.sh
+
+Config ssh
 ```
