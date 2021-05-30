@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 sudo apt-get update
 if ! type firewalld >/dev/null 2>&1; then
