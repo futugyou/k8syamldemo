@@ -1,8 +1,9 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 IPorFQDN=$(hostname -I|cut -d" " -f 1)
 
 kubeadm init --pod-network-cidr=10.244.0.0/16  --apiserver-advertise-address=$IPorFQDN  #--apiserver-cert-extra-sans="192.168.31.146" if use wsl2 , you have set this win host ip 
+# kubeadm init --config kubeadm-config.yaml
 #------if 509 do this
 # sudo apt-get update   !
 # sudo apt-get upgrade  !

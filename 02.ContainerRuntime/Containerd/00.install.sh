@@ -26,3 +26,6 @@ rm -f critest-$VERSION-linux-amd64.tar.gz
 cp containerd.service /etc/systemd/system/containerd.service
 cp crictl.yaml /etc/crictl.yaml 
 
+systemctl enable containerd
+systemctl restart containerd
+systemctl status containerd
