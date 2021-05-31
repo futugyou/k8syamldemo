@@ -10,3 +10,5 @@ exec sudo nsenter -t $(pidof systemd) -a su - $LOGNAME
 #### https://github.com/goharbor/harbor/releases
 
 ## 4~8 Create TLS certificate and key
+
+###### $1 maybe  $(hostname -I|cut -d" " -f 1) or $(hostname -f)

@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 image_tag=`date +%Y%m%d%H%M%S`;
 echo $image_tag;
 

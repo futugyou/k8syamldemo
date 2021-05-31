@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 #创建 Docker TLS 证书
 #!/bin/bash
 

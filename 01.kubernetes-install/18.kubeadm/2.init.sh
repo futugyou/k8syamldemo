@@ -22,4 +22,6 @@ sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
 
 # exec this ,then you can use master as work node
-# kubectl taint node {nodename} node-role.kubernetes.io/master:NoSchedule-
+# kubectl taint node k8s-master node-role.kubernetes.io/master-
+# reset
+# kubectl taint node k8s-master node-role.kubernetes.io/master=""

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 org=$(hostname)
 
@@ -9,8 +9,12 @@ openssl req -x509 -new -nodes -sha512 -days 3650 \
  -key ca.key \
  -out ca.crt
 
+# if error : 2406F079:random number generator:RAND_load_file:Cannot open file:../crypto/rand/randfile.c:88
+# openssl rand -writerand .rnd
+
 echo -e 'harbor Generate a Server Certificate'
 openssl genrsa -out $1.com.key 4096
+
 openssl req -sha512 -new \
     -subj "/C=CN/ST=Beijing/L=Beijing/O=$org/OU=Personal/CN=$1.com" \
     -key $1.com.key \
@@ -27,10 +31,12 @@ openssl x509 -req -sha512 -days 3650 \
     -in $1.com.csr \
     -out $1.com.crt
 
+
+openssl x509 -inform PEM -in $1.com.crt -out $1.com.cert
+
 mkdir -p /data/cert/
 mv -f $1.com.crt /data/cert/
-mv -f $1.com.key /data/cert/
-openssl x509 -inform PEM -in $1.com.crt -out $1.com.cert
+cp $1.com.key /data/cert/
 
 mkdir -p /etc/docker/certs.d/$1.com/
 mv -f $1.com.cert /etc/docker/certs.d/$1.com/
