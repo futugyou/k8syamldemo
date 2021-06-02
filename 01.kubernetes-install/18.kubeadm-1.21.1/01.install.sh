@@ -21,5 +21,11 @@ sudo curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg https://pack
 echo "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
 
 sudo apt-get update
-sudo apt-get install -y kubelet kubeadm kubectl
-sudo apt-mark hold kubelet kubeadm kubectl
+sudo apt-get install -y kubelet=1.21.1-00 kubeadm=1.21.1-00 kubectl=1.21.1-00 containerd
+sudo apt-mark hold kubelet=1.21.1-00 kubeadm=1.21.1-00 kubectl=1.21.1-00
+
+cat <<EOF | tee /etc/default/kubelet
+KUBELET_EXTRA_ARGS=--cgroup-driver=systemd
+EOF
+
+systemctl restart kubelet
