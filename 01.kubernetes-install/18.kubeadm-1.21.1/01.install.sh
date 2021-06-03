@@ -29,3 +29,5 @@ KUBELET_EXTRA_ARGS=--cgroup-driver=systemd
 EOF
 
 systemctl restart kubelet
+
+kubeadm config print init-defaults > init_default.yaml
