@@ -34,6 +34,8 @@ openssl x509 -req -sha512 -days 3650 \
 
 openssl x509 -inform PEM -in $1.com.crt -out $1.com.cert
 
+
+# it must be sync to all nodes
 mkdir -p /data/cert/
 mv -f $1.com.crt /data/cert/
 cp $1.com.key /data/cert/

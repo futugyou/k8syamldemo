@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+# It is must be ip or fqdn
 IPorFQDN=$1
 
 echo -e 'Install Latest Stable Harbor Release'
@@ -15,8 +16,14 @@ sed -i "s/\/your\/certificate\/path/\/etc\/docker\/certs.d\/$IPorFQDN.com\/$IPor
 sed -i "s/\/your\/private\/key\/path/\/etc\/docker\/certs.d\/$IPorFQDN.com\/$IPorFQDN.com.key /g" ./harbor/harbor.yml
 sed -i "s/reg.mydomain.com/$IPorFQDN/g" ./harbor/harbor.yml
 
-./harbor/install.sh - --with-notary  --with-chartmuseum
-echo -e '\033[47;31m Harbor Installation Complete \n\n \033[0m'
-echo -e "Please log out and log in or run the command 'newgrp docker' to use Docker without sudo\n\n"
-echo -e 'Login to your harbor instance:\n'
-echo -e 'docker login -u admin -p Harbor12345 '$IPorFQDN
+./harbor/prepare
+docker-compose down -v
+docker-compose up -d
+
+cd ..
+## 在配置insecure-registry时，docker 必须配置服务器的 FQDN或者IP地址.不能是服务器的hostname（比如harbor）
+## /usr/lib/systemd/system/docker.service
+## ExecStart=/usr/bin/dockerd --insecure-registry={harbor FQDN或者IP地址}
+## OR
+## vi /etc/docker/daemon.json
+## { "insecure-registries":["{harbor FQDN或者IP地址}"] }

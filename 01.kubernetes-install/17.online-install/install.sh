@@ -20,7 +20,7 @@ sh ./1.docker-install.sh $IPorFQDN
 
 sh ./2.docker-compose-install
 
-sh ./3.harbor.sh $IPorFQDN
+#sh ./3.harbor.sh $IPorFQDN
 
 sh ./4.cfssl.sh
 sh ./5.createCA.sh
