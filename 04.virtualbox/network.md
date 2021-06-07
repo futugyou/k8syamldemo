@@ -28,3 +28,5 @@ DEVICE="enp0s3"
 ONBOOT="yes"
 
 systemctl  restart network
+
+#vi /etc/resolv.conf
