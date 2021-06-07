@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
-
-faas template pull
+ 
 faas-cli template pull
-faas-cli new --list
+# if SOURCE is not openfaas
+faas-cli template store pull openfaas-incubator/rust-http
 
+faas-cli new --list
 
 faas-cli new add-demo --lang csharp -p harbor.demo.io/library
 
