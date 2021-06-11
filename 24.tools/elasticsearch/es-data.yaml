@@ -1,0 +1,148 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  labels:
+    addonmanager.kubernetes.io/mode: Reconcile
+    k8s-app: es
+    kubernetes.io/cluster-service: "true"
+    version: v6.2.5
+  name: es-data
+  namespace: default
+spec:
+  podManagementPolicy: OrderedReady
+  replicas: 12
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      k8s-app: es
+      version: v6.2.5
+  serviceName: es
+  template:
+    metadata:
+      labels:
+        k8s-app: es
+        kubernetes.io/cluster-service: "true"
+        version: v6.2.5
+    spec:
+      containers:
+      - env:
+        - name: NAMESPACE
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+        - name: ELASTICSEARCH_SERVICE_NAME
+          value: es
+        - name: NODE_MASTER
+          value: "false"
+        - name: NODE_DATA
+          value: "true"
+        - name: ES_HEAP_SIZE
+          value: 16g
+        - name: ES_JAVA_OPTS
+          value: -Xmx16g -Xms16g
+        - name: cluster.name
+          value: es
+        image: elasticsearch:v6.2.5
+        imagePullPolicy: Always
+        name: es
+        ports:
+        - containerPort: 9200
+          hostPort: 9200
+          name: db
+          protocol: TCP
+        - containerPort: 9300
+          hostPort: 9300
+          name: transport
+          protocol: TCP
+        resources:
+          limits:
+            cpu: "8"
+            memory: 32Gi
+          requests:
+            cpu: "7"
+            memory: 30Gi
+        securityContext:
+          capabilities:
+            add:
+            - IPC_LOCK
+            - SYS_RESOURCE
+        volumeMounts:
+        - mountPath: /data
+          name: es
+      - command:
+        - /bin/elasticsearch_exporter
+        - -es.uri=http://localhost:9200
+        - -es.all=true
+        image: elasticsearch_exporter:1.0.2
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /health
+            port: 9108
+            scheme: HTTP
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 10
+        name: es-exporter
+        ports:
+        - containerPort: 9108
+          hostPort: 9108
+          protocol: TCP
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /health
+            port: 9108
+            scheme: HTTP
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 10
+        resources:
+          limits:
+            cpu: 100m
+            memory: 128Mi
+          requests:
+            cpu: 25m
+            memory: 64Mi
+        securityContext:
+          capabilities:
+            drop:
+            - SETPCAP
+            - MKNOD
+            - AUDIT_WRITE
+            - CHOWN
+            - NET_RAW
+            - DAC_OVERRIDE
+            - FOWNER
+            - FSETID
+            - KILL
+            - SETGID
+            - SETUID
+            - NET_BIND_SERVICE
+            - SYS_CHROOT
+            - SETFCAP
+          readOnlyRootFilesystem: true
+      dnsPolicy: ClusterFirst
+      initContainers:
+      - command:
+        - /sbin/sysctl
+        - -w
+        - vm.max_map_count=262144
+        image: alpine:3.6
+        imagePullPolicy: IfNotPresent
+        name: elasticsearch-logging-init
+        resources: {}
+        securityContext:
+          privileged: true
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      volumes:
+      - hostPath:
+          path: /Data/es
+          type: DirectoryOrCreate
+        name: es
