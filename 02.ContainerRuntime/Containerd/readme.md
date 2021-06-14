@@ -11,4 +11,12 @@
     SystemdCgroup = true
 ```
 ####### 5. sudo systemctl restart containerd
-	
+
+
+####### use containerd
+```
+docker build -t k8s-mom:v1 . && docker save k8s-mon > demo.tar
+ctr --namespace k8s.qo images inport demo.tar
+ctr --namespace k8s.io images tag docker.io/library/k8s-mom:v1 k8s-mom:v1
+ctr --namespace k8s.io images ls
+```

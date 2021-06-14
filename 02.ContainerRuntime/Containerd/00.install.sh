@@ -23,8 +23,12 @@ wget https://github.com/kubernetes-sigs/cri-tools/releases/download/$VERSION/cri
 sudo tar zxvf critest-$VERSION-linux-amd64.tar.gz -C /usr/local/bin
 rm -f critest-$VERSION-linux-amd64.tar.gz
 
+## set kubelet start with containerd
 cp containerd.service /etc/systemd/system/containerd.service
 cp crictl.yaml /etc/crictl.yaml 
+## or run this command
+## crictl config runtime-endpoint /run/containerd/containerd.sock
+
 
 systemctl enable containerd
 systemctl restart containerd
