@@ -3,11 +3,11 @@
 image_tag=`date +%Y%m%d%H%M%S`;
 echo $image_tag;
 
-# build¾µÏñ²¢ÇÒ´òÉÏtag
+# buildé•œåƒå¹¶ä¸”æ‰“ä¸Štag
 docker build -t myapp:$image_tag .;
 docker images;
 
-# Í£Ö¹²¢É¾³ı¾É°æ myapp container
+# åœæ­¢å¹¶åˆ é™¤æ—§ç‰ˆ myapp container
 CID=$(docker ps | grep "myapp" | awk '{print $1}')
 echo $CID
 if [ "$CID" != "" ];then
@@ -15,7 +15,7 @@ if [ "$CID" != "" ];then
   docker rm $CID
 fi
 
-# °Ñ¸Õ¸Õbuild³öÀ´µÄ¾µÏñÅÜÆğÀ´
+# æŠŠåˆšåˆšbuildå‡ºæ¥çš„é•œåƒè·‘èµ·æ¥
 docker run -p 5000:80 --name myapp -d myapp:$image_tag;
 docker ps -a;
 docker logs myapp;

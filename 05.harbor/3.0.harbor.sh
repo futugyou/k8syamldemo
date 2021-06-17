@@ -21,9 +21,9 @@ docker-compose down -v
 docker-compose up -d
 
 cd ..
-## ÔÚÅäÖÃinsecure-registryÊ±£¬docker ±ØĞëÅäÖÃ·şÎñÆ÷µÄ FQDN»òÕßIPµØÖ·.²»ÄÜÊÇ·şÎñÆ÷µÄhostname£¨±ÈÈçharbor£©
+## åœ¨é…ç½®insecure-registryæ—¶ï¼Œdocker å¿…é¡»é…ç½®æœåŠ¡å™¨çš„ FQDNæˆ–è€…IPåœ°å€.ä¸èƒ½æ˜¯æœåŠ¡å™¨çš„hostnameï¼ˆæ¯”å¦‚harborï¼‰
 ## /usr/lib/systemd/system/docker.service
-## ExecStart=/usr/bin/dockerd --insecure-registry={harbor FQDN»òÕßIPµØÖ·}
+## ExecStart=/usr/bin/dockerd --insecure-registry={harbor FQDNæˆ–è€…IPåœ°å€}
 ## OR
 ## vi /etc/docker/daemon.json
-## { "insecure-registries":["{harbor FQDN»òÕßIPµØÖ·}"] }
+## { "insecure-registries":["{harbor FQDNæˆ–è€…IPåœ°å€}"] }

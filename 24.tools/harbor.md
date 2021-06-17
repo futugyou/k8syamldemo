@@ -1,18 +1,18 @@
-###### https://goharbor.io/docs/2.2.0/
-
+#### [Document](https://goharbor.io/docs/2.2.0/)
+```
 shell: /01.kubernetes-install/17.online-install/ 3.harbor.sh 3.1.harbor-tls.sh v3.ext
+```
 
-
-###### shell parameter $(hostname -I|cut -d" " -f 1) or $(hostname -f)
+#### shell parameter $(hostname -I|cut -d" " -f 1) or $(hostname -f)
 
 if openssl error random number generator:RAND_load_file:Cannot open file
 ```
 run openssl rand -writerand .rnd in tip path
 ```
 
-###### docker-compose should be version 3.3
+#### docker-compose should be version 3.3
 
-###### exec to harbor db
+#### exec to harbor db
 ```
 psql -U postgres -h postgresql -p 5432
 pwd: root123
