@@ -100,3 +100,26 @@ brctl hairpin bridge_home veth_dustin on
 sysctl --write net.ipv4.vs.conntrack=1
 ip netns exec netns_dustin curl 10.100.100.100:8080
 ```
+##### The bridge turns on promiscuous mode
+```
+ip link set bridge_home promisc on
+```
+##### Improve masquerade usage
+```
+iptables --table nat --delete POSTROUTING --source 10.0.0.0/24 --jump MASQUERADE
+iptables --table nat --append POSTROUTING --source 10.0.0.11/32 --jump MASQUERADE
+```
+##### use ipset
+```
+iptables --table nat --delete POSTROUTING --source 10.0.0.11/32 --jump MASQUERADE
+ipset create DUSTIN-LOOP-BACK hash:ip,port,ip
+ipset add DUSTIN-LOOP-BACK 10.0.0.11,tcp:8080,10.0.0.11
+iptables --table nat --append POSTROUTING --match set --match-set DUSTIN-LOOP-BACK dst,dst,src --jump MASQUERADE
+```
+##### Add another server to the virtual service
+```
+ipvsadm --add-server --tcp-service 10.100.100.100:8080 --real-server 10.0.0.21:8080 --masquerading
+ipset add DUSTIN-LOOP-BACK 10.0.0.21,tcp:8080,10.0.0.21
+curl 10.100.100.100:8080
+ipvsadm -Ln
+```
