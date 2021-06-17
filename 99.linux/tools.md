@@ -1,14 +1,14 @@
-####### ½«ÄÚÍâÍø½øÐÐÓ³Éä. 10.0.0.4ÄÚ 52.230.46.84Íâ
+###### å°†å†…å¤–ç½‘è¿›è¡Œæ˜ å°„. 10.0.0.4å†… 52.230.46.84å¤–
 ```
 iptables -t nat -A OUTPUT -d 10.0.0.4 -j DNAT --to-destination 52.230.46.84
 ```
 
-####### export
+###### export
 ```
 export PATH=/bin/:$PATH
 ```
 
-####### tee write 
+###### tee write 
 ```
 cat <<EOF | tee /etc/modules-load.d/containerd.conf
 overlay
@@ -19,17 +19,17 @@ overlay
 EOF
 ```
 
-####### tar
+###### tar
 ```
 tar -xzvf kubernetes-server-linux-amd64.tar.gz
 ```
 
-####### ln
+###### ln
 ```
 ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 ```
 
-#######  public key is not available: NO_PUBKEY 
+######  public key is not available: NO_PUBKEY 
 ```
 sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 3B4FE6ACC0B21F32
 ```
