@@ -15,5 +15,17 @@ docker-compose -f docker-compose.yaml up
 
 #### Use
 Open Grafana, Configuration -> Data Sources -> Add Data Source -> Loki
+
+
+
+#### [install with Helm](https://grafana.com/docs/loki/latest/installation/helm/)
+``` 
+helm repo add grafana https://grafana.github.io/helm-charts
+helm repo update
+helm upgrade --install loki grafana/loki-stack --namespace=animal  --set grafana.enabled=true,prometheus.enabled=true,prometheus.alertmanager.persistentVolume.enabled=false,prometheus.server.persistentVolume.enabled=false
+#helm upgrade --install loki-grafana grafana/grafana --namespace=animal 
+kubectl get secret --namespace animal loki-grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
+nFjugLw0q5qSHkR66mGP5bz3duWAQuRC2YkYVtRy
+kubectl port-forward --namespace animal --address 192.168.15.136  service/loki-grafana 3000:80
 ```
-```
+<span style="color:green">add --address can access form outside of cluster</span>.

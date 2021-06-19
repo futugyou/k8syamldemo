@@ -1,4 +1,4 @@
-vi k8smain.tf
-provider "kubernetes" {}
-terraform init  
-ls -al
+terraform init
+terraform init -upgrade 
+terraform plan
+terraform apply

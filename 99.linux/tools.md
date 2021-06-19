@@ -33,3 +33,9 @@ ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 ```
 sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 3B4FE6ACC0B21F32
 ```
+
+### Hostname
+```
+hostnamectl set-hostname master01 --static
+vi /etc/hosts
+```
