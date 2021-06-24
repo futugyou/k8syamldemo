@@ -1,15 +1,17 @@
 #### [install with docker](https://grafana.com/docs/loki/latest/installation/docker/)
 ``` 
-wget https://raw.githubusercontent.com/grafana/loki/v2.2.0/cmd/loki/loki-local-config.yaml -O loki-config.yaml
-docker run -v /d/docker/loki:/mnt/config -p 3100:3100 grafana/loki:2.2.0 -config.file=/mnt/config/loki-config.yaml
-wget https://raw.githubusercontent.com/grafana/loki/v2.2.0/cmd/promtail/promtail-docker-config.yaml -O promtail-config.yaml
-docker run -v /d/docker/loki:/mnt/config -v /var/log:/var/log grafana/promtail:2.2.0 -config.file=/mnt/config/promtail-config.yaml
+# user/pass admin/admin
+docker run -d --name=grafana -p 3000:3000 grafana/grafana:latest
+wget https://raw.githubusercontent.com/grafana/loki/v2.2.1/cmd/loki/loki-local-config.yaml -O loki-config.yaml
+docker run -v /d/docker/loki:/mnt/config -p 3100:3100  -d  grafana/loki:2.2.1 -config.file=/mnt/config/loki-config.yaml
+wget https://raw.githubusercontent.com/grafana/loki/v2.2.1/cmd/promtail/promtail-docker-config.yaml -O promtail-config.yaml
+docker run -v /d/docker/loki:/mnt/config -v /var/log:/var/log  -d grafana/promtail:2.2.1 -config.file=/mnt/config/promtail-config.yaml
 ```
 
 
 #### install with docker-compose   
 ```
-wget https://raw.githubusercontent.com/grafana/loki/v2.2.0/production/docker-compose.yaml -O docker-compose.yaml
+wget https://raw.githubusercontent.com/grafana/loki/v2.2.1/production/docker-compose.yaml -O docker-compose.yaml
 docker-compose -f docker-compose.yaml up
 ```
 

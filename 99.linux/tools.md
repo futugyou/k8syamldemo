@@ -39,3 +39,9 @@ sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 3B4FE6ACC0B21F32
 hostnamectl set-hostname master01 --static
 vi /etc/hosts
 ```
+
+### job ,use &
+```
+jobs -l
+kill pid
+```
