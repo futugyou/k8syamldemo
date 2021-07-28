@@ -43,3 +43,10 @@ dotnet-counters monitor -n websample --refresh-interval 1 --counters System.Net.
 ```
 dotnet-counters monitor -n websample --refresh-interval 1 --counters System.Net.Sockets
 ```
+
+### install dotnet-stack
+```
+dotnet tool install --global dotnet-stack
+dotnet-stack ps
+dotnet-stack report --process-id 119680
+```
