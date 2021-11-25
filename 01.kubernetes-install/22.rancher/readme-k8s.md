@@ -26,3 +26,27 @@ helm install rancher rancher-latest/rancher \
 
 kubectl -n cattle-system rollout status deploy/rancher
 ```
+
+### change website address 
+```
+http://locahost:8080/admin/settings
+```
+
+### ERROR: DNS Checking loopback IP address 127.0.0.0/8
+```
+sudo vi /etc/docker/daemon.json
+add rancher website ip into 'dns' node, like this 
+{
+  "exec-opts": ["native.cgroupdriver=systemd"],
+  "log-driver": "json-file",
+  "log-opts": {
+    "max-size": "100m"
+  },
+  "storage-driver": "overlay2",
+  "registry-mirrors": [
+    "https://docker.mirrors.ustc.edu.cn/"
+  ],
+  "dns": ["8.8.8.8", "8.8.4.4", "172.24.160.1"]
+}
+sudo service docker restart
+```

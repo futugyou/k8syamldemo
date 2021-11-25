@@ -44,6 +44,8 @@ network:
             gateway4: 192.168.137.1
             dhcp4: true
             optional: true
+            nameservers:
+                addresses: [8.8.8.8, 8.8.4.4]
     version: 2
               
 
