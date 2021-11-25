@@ -30,3 +30,24 @@ ONBOOT="yes"
 systemctl  restart network
 ```
 #vi /etc/resolv.conf
+
+
+
+### hyper-v static ip
+```
+sudo vi /etc/netplan/**-cloud-init.yaml
+
+network:
+    ethernets:
+        eth0:
+            addresses: [192.168.137.200/24]
+            gateway4: 192.168.137.1
+            dhcp4: true
+            optional: true
+    version: 2
+              
+
+sudo  netplan apply 
+
+dns: sudo vi /etc/resolv.conf
+```

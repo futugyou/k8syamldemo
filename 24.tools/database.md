@@ -23,5 +23,5 @@ docker run --name my-redis -d   -p 6379:6379  -v /docker/host/dir:/data redis
 
 ### mongodb
 ```
-docker run --name mongodb -d -v //d/docker/:/data/db  -e MONGO_INITDB_ROOT_USERNAME=test -e MONGO_INITDB_ROOT_PASSWORD=123456 mongo
+docker run --name mongodb -d -p 27017:27017 -v //d/docker/:/data/db  -e MONGO_INITDB_ROOT_USERNAME=test -e MONGO_INITDB_ROOT_PASSWORD=123456 mongo
 ```
