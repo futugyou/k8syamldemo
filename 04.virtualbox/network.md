@@ -35,19 +35,25 @@ systemctl  restart network
 
 ### hyper-v static ip
 ```
+hyper-v network: e.g (Default Switch)
+ip: 172.24.160.1
+mask:255.255.255.0
+gateway: 172.14.160.254
+
+vm: e.g (ubuntu 20)
+
 sudo vi /etc/netplan/**-cloud-init.yaml
 
 network:
     ethernets:
         eth0:
-            addresses: [192.168.137.200/24]
-            gateway4: 192.168.137.1
+            addresses: [172.24.160.205/24]
+            gateway4: 172.24.160.1
             dhcp4: true
             optional: true
             nameservers:
                 addresses: [8.8.8.8, 8.8.4.4]
-    version: 2
-              
+    version: 2              
 
 sudo  netplan apply 
 

@@ -1,7 +1,21 @@
 ### mariadb
 ```
-docker run -p 127.0.0.1:3306:3306  --name  mariadb -e MYSQL_ROOT_PASSWORD=123456 -d mariadb  --lower_case_table_names=1
+docker run -p 192.168.110.36:3306:3306 -h 192.168.110.36  --name  mariadb -e MYSQL_ROOT_PASSWORD=123456  -v //d/docker/mariadb/data:/var/lib/mysql   -d mariadb  --lower_case_table_names=1
 /etc/mysql# vim mariadb.cnf
+```
+
+### mysql
+```
+docker run -p 3306:3306 --name mysql -v //d/docker/mysql/conf:/etc/mysql -v //d/docker/mysql/logs:/var/log/mysql -v //d/docker/mysql/data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=123456 -d mysql
+
+docker run -itd --name=mysql -v //d/docker/mysql/conf:/etc/mysql -v //d/docker/mysql/conf/my.cnf:/etc/mysql/my.cnf -v //d/docker/mysql/logs:/var/log/mysql -v //d/docker/mysql/data:/var/lib/mysql  -p 3306:3306 -e MYSQL_ROOT_PASSWORD=123456 mysql
+```
+
+### mssql
+```
+docker run -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=Pass@w0rd" -p 51433:1433 --name mssql -h mssql -d mcr.microsoft.com/mssql/server:latest
+docker exec -it mssql /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P Pass@w0rd -Q 'ALTER LOGIN SA WITH PASSWORD=NewPass@w0rd'
+docker exec -it mssql /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P Pass@w0rd
 ```
 
 ### check version
