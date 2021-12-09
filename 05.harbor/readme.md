@@ -65,3 +65,12 @@ update harbor_user set password='a71a7d0df981a61cbb53a97ed8d78f3e',salt='ah3fdh5
 
 update harbor_user set password='68b057f911feab84067a55fb75dfd135',salt='GQnLzX3s5t5Qyll4aJhW3QLCyJ6HuU2U' where username='admin';
 ```
+
+### add ImagePullSecrets in k8s
+```
+kubectl create secret docker-registry myregistrykey --docker-server=http://192.168.110.36:8888 \
+          --docker-username=admin --docker-password=Harbor12345 \
+          --docker-email=test@yunhai.com
+
+kubectl patch serviceaccount default -p '{"imagePullSecrets": [{"name": "myregistrykey"}]}'
+```
