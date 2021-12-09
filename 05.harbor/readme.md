@@ -1,3 +1,38 @@
+### 在配置insecure-registry时，docker 必须配置服务器的 FQDN或者IP地址.不能是服务器的hostname（比如harbor）
+### /usr/lib/systemd/system/docker.service
+### ExecStart=/usr/bin/dockerd --insecure-registry={harbor FQDN或者IP地址}
+### OR
+### vi /etc/docker/daemon.json
+### { "insecure-registries":["{harbor FQDN或者IP地址}"] }
+```
+{
+  "builder": {
+    "gc": {
+      "defaultKeepStorage": "20GB",
+      "enabled": true
+    }
+  },
+  "experimental": false,
+  "features": {
+    "buildkit": false
+  },
+  "insecure-registries": [
+    "192.168.110.36:8888"
+  ],
+  "registry-mirrors": [
+    "https://dockerhub.azk8s.cn",
+    "https://registry.docker-cn.com",
+    "https://docker.mirrors.ustc.edu.cn",
+    "http://hub-mirror.c.163.com"
+  ]
+}
+```
+
+### docker login
+```
+docker login -uadmin -pHarbor12345 http://192.168.110.36:8888
+```
+
 #### [Document](https://goharbor.io/docs/2.2.0/)
 ```
 shell: /01.kubernetes-install/17.online-install/ 3.harbor.sh 3.1.harbor-tls.sh v3.ext

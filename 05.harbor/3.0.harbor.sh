@@ -21,9 +21,3 @@ docker-compose down -v
 docker-compose up -d
 
 cd ..
-## 在配置insecure-registry时，docker 必须配置服务器的 FQDN或者IP地址.不能是服务器的hostname（比如harbor）
-## /usr/lib/systemd/system/docker.service
-## ExecStart=/usr/bin/dockerd --insecure-registry={harbor FQDN或者IP地址}
-## OR
-## vi /etc/docker/daemon.json
-## { "insecure-registries":["{harbor FQDN或者IP地址}"] }
