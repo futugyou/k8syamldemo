@@ -60,7 +60,7 @@ sudo sed -e 's|^mirrorlist=|#mirrorlist=|g' \
 
 ### useful tools
 ```
-yum -y install wget jq psmisc vim net-tools nfs-utils telnet yum-utils device-mapper-persistent-data lvm2 git network-scripts tar curl -y
+yum -y install socat conntrack ebtables wget jq psmisc vim net-tools nfs-utils telnet yum-utils device-mapper-persistent-data lvm2 git network-scripts tar curl -y
 ```
 
 ### close firewalld、selinux、dnsmasq、swap

@@ -19,9 +19,10 @@ overlay
 EOF
 ```
 
-###### tar
+###### tar,zip
 ```
 tar -xzvf kubernetes-server-linux-amd64.tar.gz
+unzip -o fastgithub_linux-x64.zip -d ./ 
 ```
 
 ###### ln
