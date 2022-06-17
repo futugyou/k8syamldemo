@@ -147,3 +147,22 @@ EOF
 systemctl enable --now systemd-modules-load.service
 systemctl restart systemd-modules-load.service
 ```
+
+### is not in the sudoers file. This incident will be reported
+```
+su root
+chmod 777 /etc/sudoers
+vi /etc/sudoers
+
+add:
+username ALL=(ALL)ALL
+
+chmod 440 /etc/sudoers
+```
+
+### can ssh, can not ping
+```
+ifconfig ens33 up
+dhclient ens33 
+ifconfig ens33
+```
