@@ -166,3 +166,9 @@ ifconfig ens33 up
 dhclient ens33 
 ifconfig ens33
 ```
+
+### user
+```
+adduser node02
+passwd node02
+```
