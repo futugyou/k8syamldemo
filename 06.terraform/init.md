@@ -5,7 +5,9 @@ unzip terraform_1.0.0_linux_amd64.zip
 mv terraform /usr/local/bin/
 terraform -version
 terraform init
+terraform init -upgrade 
 terraform plan
 terraform apply
-terraform destroy
+terraform state
+terraform workspace
 ```
