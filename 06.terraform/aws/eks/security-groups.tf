@@ -87,7 +87,7 @@ resource "aws_security_group" "eks-default" {
     to_port   = "0"
   }
 
-   tags = {
+  tags = {
     Name = format("eks-default-%s",var.cluster_name) 
   }
 }

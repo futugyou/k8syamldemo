@@ -4,6 +4,12 @@ variable "default_region" {
   default     = "ap-southeast-1"
 }
 
+variable "environment" {
+  description = "Environment of Cluster"
+  type        = string
+  default     = "dev"
+}
+
 variable "cluster_name" {
   description = "Name of Cluster"
   type        = string
@@ -14,6 +20,18 @@ variable "cluster_version" {
   description = "Version of Cluster"
   type        = string
   default     = "1.22"
+}
+
+variable "cluster_role_name" {
+  description = "cluster role name"
+  type        = string
+  default     = "eks-osim-dev-cluster-role"
+}
+
+variable "node_role_name" {
+  description = "node role name"
+  type        = string
+  default     = "eks-osim-dev-node-role"
 }
 
 variable "vpc_cidr" {
@@ -40,6 +58,12 @@ variable "ingress_security_group_rule" {
   description = "ingress security group rule"
   type        = list(string)
   default     = ["10.0.0.0/8", "172.16.0.0/12", "192.168.0.0/16"]
+}
+
+variable "ec2_instance_types" {
+  description = "ec2 instance types"
+  type        = list(string)
+  default     = ["t2.small", "t2.medium"]
 }
 
 variable "vpc_enable_nat_gateway" {
