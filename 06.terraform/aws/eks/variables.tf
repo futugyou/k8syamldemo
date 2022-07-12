@@ -36,6 +36,12 @@ variable "vpc_public_subnets" {
   default     = ["10.0.4.0/24", "10.0.5.0/24", "10.0.6.0/24"]
 }
 
+variable "ingress_security_group_rule" {
+  description = "ingress security group rule"
+  type        = list(string)
+  default     = ["10.0.0.0/8", "172.16.0.0/12", "192.168.0.0/16"]
+}
+
 variable "vpc_enable_nat_gateway" {
   description = "Enable NAT gateway for VPC"
   type        = bool

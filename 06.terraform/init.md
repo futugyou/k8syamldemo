@@ -1,4 +1,4 @@
-###### [Document](https://www.terraform.io/downloads.html)
+#### [Document](https://www.terraform.io/downloads.html)
 ```
 wget https://releases.hashicorp.com/terraform/1.0.0/terraform_1.0.0_linux_amd64.zip
 unzip terraform_1.0.0_linux_amd64.zip
@@ -10,4 +10,10 @@ terraform plan
 terraform apply
 terraform state
 terraform workspace
+```
+
+###  [Document](https://github.com/GoogleCloudPlatform/terraformer)
+```
+terraformer import aws --resources=sg  --regions=ap-southeast-1
+terraformer import aws --resources=aws_ecs_cluster  --regions=ap-southeast-1
 ```
