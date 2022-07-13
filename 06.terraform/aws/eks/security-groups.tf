@@ -1,5 +1,5 @@
-resource "aws_security_group" "eks-sg-22" {
-  name        = format("eks-sg-22-%s",var.cluster_name) 
+resource "aws_security_group" "eks-remote-access" {
+  name        = format("eks-remote-access-%s",var.cluster_name) 
   description = "Allow TLS inbound traffic"
   vpc_id      = module.vpc.vpc_id
 
@@ -17,7 +17,7 @@ resource "aws_security_group" "eks-sg-22" {
     cidr_blocks = ["0.0.0.0/0"]
   }
   tags = {
-    Name = format("eks-sg-22-%s",var.cluster_name) 
+    Name = format("eks-remote-access-%s",var.cluster_name) 
   }
 }
  
