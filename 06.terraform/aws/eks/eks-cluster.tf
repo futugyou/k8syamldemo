@@ -11,6 +11,10 @@ module "eks" {
     Env  = var.environment
   }
   
+  cluster_addons = {
+    adot = {}
+  }
+  
   cluster_encryption_config = [{
     provider_key_arn = aws_kms_key.eks.arn
     resources        = ["secrets"]

@@ -8,6 +8,7 @@ terraform init
 terraform init -upgrade 
 terraform plan
 terraform apply
+terraform apply -auto-approve
 terraform state
 terraform workspace
 ```
