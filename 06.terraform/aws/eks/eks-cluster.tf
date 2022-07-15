@@ -12,13 +12,19 @@ module "eks" {
   }
   
   cluster_addons = {
-    adot = {}
+    coredns = {
+      resolve_conflicts = "OVERWRITE"
+    }
+    kube-proxy = {}
+    vpc-cni = {
+      resolve_conflicts = "OVERWRITE"
+    }
   }
   
-  cluster_encryption_config = [{
-    provider_key_arn = aws_kms_key.eks.arn
-    resources        = ["secrets"]
-  }]
+#   cluster_encryption_config = [{
+#     provider_key_arn = aws_kms_key.eks.arn
+#     resources        = ["secrets"]
+#   }]
 #   create_kms_key = true
 
   cluster_security_group_id = aws_security_group.eks-default.id
@@ -30,35 +36,36 @@ module "eks" {
   iam_role_arn = aws_iam_role.eks-cluster.arn
 
   eks_managed_node_group_defaults = {
-    disk_size              = 10
-    instance_types         = var.ec2_instance_types
-    vpc_security_group_ids = [aws_security_group.eks-node.id]
-    create_iam_role        = false
-    iam_role_arn           = aws_iam_role.eks-node.arn
+    disk_size                = 10
+    instance_types           = var.ec2_instance_types
+    vpc_security_group_ids   = [aws_security_group.eks-node.id]
+    create_iam_role          = false
+    iam_role_arn             = aws_iam_role.eks-node.arn
+    iam_role_use_name_prefix = false
   }
 
   eks_managed_node_groups = {
-    default_node_group_one = {
-        create_launch_template = false
-        launch_template_name   = ""
-        min_size     = 1
-        max_size     = 10
-        desired_size = 1
-        instance_types = var.ec2_instance_types
-    }
+    # default_node_group_one = {
+    #     create_launch_template = false
+    #     launch_template_name   = ""
+    #     min_size     = 1
+    #     max_size     = 10
+    #     desired_size = 1
+    #     instance_types = var.ec2_instance_types
+    # }
 
-    blue = {
-        create_launch_template = false
-        launch_template_name   = ""
-        min_size     = 1
-        max_size     = 10
-        desired_size = 2
-        instance_types = var.ec2_instance_types
-        remote_access = {
-            ec2_ssh_key               = aws_key_pair.this.key_name
-            source_security_group_ids = [aws_security_group.eks-remote-access.id]
-        }
-    }
+    # blue = {
+    #     create_launch_template = false
+    #     launch_template_name   = ""
+    #     min_size     = 1
+    #     max_size     = 10
+    #     desired_size = 2
+    #     instance_types = var.ec2_instance_types
+    #     remote_access = {
+    #         ec2_ssh_key               = aws_key_pair.this.key_name
+    #         source_security_group_ids = [aws_security_group.eks-remote-access.id]
+    #     }
+    # }
 
     default_node_group = {
         create_launch_template = false

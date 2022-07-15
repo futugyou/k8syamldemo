@@ -34,6 +34,36 @@ data "aws_iam_policy_document" "eks-instance" {
   }
 }
 
+resource "aws_iam_role_policy" "eks-adot-policy" {
+  name = "AWSDistroOpenTelemetryPolicy"
+  policy = jsonencode(
+    {
+        "Version": "2012-10-17",
+        "Statement": [
+            {
+                "Effect": "Allow",
+                "Action": [
+                    "logs:PutLogEvents",
+                    "logs:CreateLogGroup",
+                    "logs:CreateLogStream",
+                    "logs:DescribeLogStreams",
+                    "logs:DescribeLogGroups",
+                    "xray:PutTraceSegments",
+                    "xray:PutTelemetryRecords",
+                    "xray:GetSamplingRules",
+                    "xray:GetSamplingTargets",
+                    "xray:GetSamplingStatisticSummaries",
+                    "ssm:GetParameters"
+                ],
+                "Resource": "*"
+            }
+        ]
+    }
+  )
+  role = aws_iam_role.eks-node.id
+}
+
+
 resource "aws_iam_role" "eks-cluster" {
   name = var.cluster_role_name
   assume_role_policy = data.aws_iam_policy_document.eks-instance.json
