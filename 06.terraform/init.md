@@ -11,6 +11,8 @@ terraform apply
 terraform apply -auto-approve
 terraform state
 terraform workspace
+terraform destroy
+terraform destroy -auto-approve
 ```
 
 ###  [Document](https://github.com/GoogleCloudPlatform/terraformer)

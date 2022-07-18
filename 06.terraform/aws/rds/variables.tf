@@ -1,7 +1,7 @@
 variable "identifier" {
   description = "identifier"
   type        = string
-  default     = "onecloud-dev"
+  default     = "eks-osim-dev"
 }
 
 variable "instance_class" {
