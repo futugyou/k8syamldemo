@@ -63,7 +63,7 @@ variable "ingress_security_group_rule" {
 variable "ec2_instance_types" {
   description = "ec2 instance types"
   type        = list(string)
-  default     = ["t2.small", "t2.medium"]
+  default     = ["t3a.medium", "t3.medium"]
 }
 
 variable "vpc_enable_nat_gateway" {

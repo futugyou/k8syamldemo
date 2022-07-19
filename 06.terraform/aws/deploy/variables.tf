@@ -8,4 +8,40 @@ variable "cluster_name" {
   description = "Name of Cluster"
   type        = string
   default     = "eks-osim-dev"
+} 
+
+variable "dapr_charts_url" {
+  description = "dapr charts url"
+  type        = string
+  default     = "https://dapr.github.io/helm-charts/"
+}
+
+variable "dapr-namespace" {
+  description = "dapr namespace"
+  type        = string
+  default     = "dapr-system"
+}
+
+variable "dapr-version" {
+  description = "dapr version"
+  type        = string
+  default     = "1.8.0"
+}
+
+variable "istio_charts_url" {
+  description = "istio charts url"
+  type        = string
+  default     = "https://istio-release.storage.googleapis.com/charts/"
+}
+
+variable "istio-namespace" {
+  description = "istio namespace"
+  type        = string
+  default     = "istio-system"
+}
+
+variable "istio-version" {
+  description = "istio version"
+  type        = string
+  default     = "1.14.2"
 }
