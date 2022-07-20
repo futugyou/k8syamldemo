@@ -45,3 +45,21 @@ variable "istio-version" {
   type        = string
   default     = "1.14.2"
 }
+
+variable "gocd_charts_url" {
+  description = "gocd charts url"
+  type        = string
+  default     = "https://gocd.github.io/helm-chart"
+}
+
+variable "gocd-namespace" {
+  description = "gocd namespace"
+  type        = string
+  default     = "gocd"
+}
+
+variable "openfaas_charts_url" {
+  description = "openfaas charts url"
+  type        = string
+  default     = "https://openfaas.github.io/faas-netes"
+}

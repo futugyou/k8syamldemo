@@ -4,6 +4,6 @@ resource "helm_release" "dapr" {
   name             = "dapr"
   namespace        = var.dapr-namespace
   version          = var.dapr-version
-  cleanup_on_fail = true
+  cleanup_on_fail  = true
   create_namespace = true
 }
