@@ -13,6 +13,16 @@ terraform {
       source  = "hashicorp/kubernetes"
       version = ">= 2.10"
     }
+
+    tls = {
+      source = "hashicorp/tls"
+      version = "3.4.0"
+    }
+
+    sshclient = {
+      source = "luma-planet/sshclient"
+      version = "1.0.1"
+    }
   }
 }
 
@@ -44,4 +54,12 @@ provider "helm" {
       command     = "aws"
     }
   }
+}
+
+provider "tls" {
+  # Configuration options
+} 
+
+provider "sshclient" {
+  # Configuration options
 }

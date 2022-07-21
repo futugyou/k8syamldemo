@@ -1,3 +1,23 @@
+resource "tls_private_key" "gocd-server-ssh" {
+  algorithm = "RSA"
+  rsa_bits  = 4096
+}
+
+resource "tls_private_key" "gocd-agent-ssh" {
+  algorithm = "RSA"
+  rsa_bits  = 4096
+}
+
+output "gocd-server-ssh-public_key" {
+  value     = tls_private_key.gocd-server-ssh.public_key_openssh
+  sensitive = false
+}
+
+output "gocd-agent-ssh-public_key" {
+  value     = tls_private_key.gocd-agent-ssh.public_key_openssh
+  sensitive = false
+}
+
 resource "helm_release" "gocd" {
   repository       = var.gocd_charts_url
   name             = "gocd"
@@ -27,9 +47,14 @@ resource "helm_release" "gocd" {
   }
 
   set {
-    name  = "agent.persistence.enabled"
+    name  = "agent.privileged"
     value = true
   }
+
+  # set {
+  #   name  = "agent.persistence.enabled"
+  #   value = true
+  # }
 
   set {
     name  = "agent.persistence.extraVolumes[0].name"
