@@ -4,7 +4,7 @@ resource "kubernetes_namespace" "openfaas" {
   }
 
   metadata {
-    name = "openfaas"
+    name = var.openfaas_namespace
     labels = {
       role            = "openfaas-system"
       access          = "openfaas-system"
@@ -19,7 +19,7 @@ resource "kubernetes_namespace" "openfaas-fn" {
   }
 
   metadata {
-    name = "openfaas-fn"
+    name = var.openfaas_fn_namespace
     labels = {
       role            = "openfaas-fn"
       istio-injection = "enabled"
@@ -31,14 +31,14 @@ resource "helm_release" "openfaas" {
   repository = var.openfaas_charts_url
   chart      = "openfaas"
   name       = "openfaas"
-  namespace  = "openfaas"
+  namespace  = kubernetes_namespace.openfaas.metadata.0.name
   cleanup_on_fail  = true
 
   depends_on = [kubernetes_namespace.openfaas]
 
   set {
     name  = "functionNamepsace"
-    value = "openfaas-fn"
+    value = kubernetes_namespace.openfaas-fn.metadata.0.name
   }
 
   set {

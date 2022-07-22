@@ -1,30 +1,55 @@
-resource "tls_private_key" "gocd-server-ssh" {
-  algorithm = "RSA"
-  rsa_bits  = 4096
+resource "kubernetes_namespace" "gocd" {
+  metadata {
+    name = var.gocd-namespace
+  }
 }
 
-resource "tls_private_key" "gocd-agent-ssh" {
-  algorithm = "RSA"
-  rsa_bits  = 4096
+resource "kubernetes_secret" "gocd-server-ssh" {
+  metadata {
+    name      = "gocd-server-ssh"
+    namespace = kubernetes_namespace.gocd.metadata.0.name
+  }
+
+  data = {
+    "id_rsa"      = tls_private_key.gocd-server-ssh.private_key_pem
+    "id_rsa.pub"  = tls_private_key.gocd-server-ssh.public_key_openssh
+    "known_hosts" = templatefile(
+        "${path.module}/templates/known_hosts.tpl",
+        { 
+        keyscan = data.sshclient_keyscan.github_keyscan,
+        }
+    )
+  }
+
+  type = "Opaque"
 }
 
-output "gocd-server-ssh-public_key" {
-  value     = tls_private_key.gocd-server-ssh.public_key_openssh
-  sensitive = false
-}
+resource "kubernetes_secret" "gocd-agent-ssh" {
+  metadata {
+    name      = "gocd-agent-ssh"
+    namespace = kubernetes_namespace.gocd.metadata.0.name
+  }
 
-output "gocd-agent-ssh-public_key" {
-  value     = tls_private_key.gocd-agent-ssh.public_key_openssh
-  sensitive = false
+  data = {
+    "id_rsa"      = tls_private_key.gocd-agent-ssh.private_key_pem
+    "id_rsa.pub"  = tls_private_key.gocd-agent-ssh.public_key_openssh
+    "known_hosts" = templatefile(
+        "${path.module}/templates/known_hosts.tpl",
+        { 
+        keyscan = data.sshclient_keyscan.github_keyscan,
+        }
+    )
+  }
+
+  type = "Opaque"
 }
 
 resource "helm_release" "gocd" {
   repository       = var.gocd_charts_url
   name             = "gocd"
   chart            = "gocd"
-  namespace        = var.gocd-namespace
+  namespace        = kubernetes_namespace.gocd.metadata.0.name
   cleanup_on_fail  = true
-  create_namespace = true
   
   set {
     name  = "server.security.ssh.enabled"

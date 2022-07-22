@@ -58,8 +58,26 @@ variable "gocd-namespace" {
   default     = "gocd"
 }
 
+variable "known_hosts" {
+  description = "known hosts"
+  type        = list(string)
+  default     = ["github.com"]
+}
+
 variable "openfaas_charts_url" {
   description = "openfaas charts url"
   type        = string
   default     = "https://openfaas.github.io/faas-netes"
+}
+
+variable "openfaas_namespace" {
+  description = "openfaas namespace"
+  type        = string
+  default     = "openfaas"
+}
+
+variable "openfaas_fn_namespace" {
+  description = "openfaas namespace"
+  type        = string
+  default     = "openfaas-fn"
 }
