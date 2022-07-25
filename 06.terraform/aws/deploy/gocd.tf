@@ -52,6 +52,16 @@ resource "helm_release" "gocd" {
   cleanup_on_fail  = true
   
   set {
+    name  = "serviceAccount.name"
+    value = "gocd"
+  }
+
+  set {
+    name  = "agent.serviceAccount.name"
+    value = "gocd"
+  }
+
+  set {
     name  = "server.security.ssh.enabled"
     value = true
   }
