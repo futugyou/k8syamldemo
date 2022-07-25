@@ -3,11 +3,18 @@
 yum install epel-release -y
 yum install ansible -y
 ```
+### ssh
+```
+ssh-keygen -t rsa -b 4096 
+ssh-copy-id master01
+```
 
-#### add group 
+#### add group (eg. master01)
 ```
 vi /etc/ansible/hosts 
+ansible all -m ping
 ansible {group-name} -m ping
+ansible all -a "/bin/echo hello"
 ```
 #### install Tower 
 ```
