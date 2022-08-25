@@ -1,0 +1,16 @@
+node:
+  cluster: amazon-cluster
+  id: amazon-dev
+
+admin:
+  access_log_path: /tmp/admin_access.log
+  address:
+    socket_address:
+      protocol: TCP
+      address: 0.0.0.0
+      port_value: 9902
+dynamic_resources:
+  cds_config:
+    path: /var/lib/envoy/cds.yaml
+  lds_config:
+    path: /var/lib/envoy/lds.yaml

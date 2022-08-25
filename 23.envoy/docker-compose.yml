@@ -1,0 +1,10 @@
+version: '3.4'
+
+services:
+  amazonapigateway:
+    image: envoyproxy/envoy:v1.23.0
+    volumes:
+      - ./envoy:/etc/envoy
+    ports:
+    - "9902:9902"
+    - "10000:10000"
