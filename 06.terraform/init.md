@@ -6,6 +6,7 @@ mv terraform /usr/local/bin/
 terraform -version
 terraform init
 terraform init -upgrade 
+terraform validate
 terraform plan
 terraform apply
 terraform apply -auto-approve

@@ -10,14 +10,26 @@ variable "vpc_name" {
   default     = "vpc-terraform"
 }
 
+variable "eip_name" {
+  description = "name of eip"
+  type        = string
+  default     = "eip-terraform"
+}
+
 variable "vpc_cidr" {
   description = "CIDR block for VPC"
   type        = string
   default     = "10.1.0.0/16"
 }
- 
-variable "ec2_instance_types" {
-  description = "ec2 instance types"
+
+variable "public_subnets" {
+  description = "public subnets"
   type        = list(string)
-  default     = ["t3a.medium", "t3.medium"]
+  default     = ["10.1.1.0/24"]
+}
+
+variable "private_subnets" {
+  description = "private subnets"
+  type        = list(string)
+  default     = ["10.1.4.0/24"]
 }
