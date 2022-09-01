@@ -1,4 +1,5 @@
 // it will create default 'route table' and 'network ACL'
+// for managed node? network
 resource "aws_vpc" "cluster" {
   assign_generated_ipv6_cidr_block = false
   cidr_block                       = var.cluster-vpc-cidr

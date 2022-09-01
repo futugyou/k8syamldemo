@@ -1,3 +1,4 @@
+// for pod network
 resource "aws_subnet" "additional-subnet" {
   count                = length(var.additional-subnet)
   cidr_block           = element(concat(var.additional-subnet, [""]), count.index)
@@ -7,9 +8,9 @@ resource "aws_subnet" "additional-subnet" {
   map_public_ip_on_launch         = false
   assign_ipv6_address_on_creation = false
   tags = {
-    "Name"                                      = format("i%s-%s", count.index + 1, var.cluster-name)
+    "Name"                                      = format("%s-pod-%s", var.cluster-name, count.index + 1)
     "kubernetes.io/cluster/${var.cluster-name}" = "shared"
-    "workshop"                                  = format("subnet-i%s", count.index + 1)
+    "workshop"                                  = format("subnet-pod-%s", count.index + 1)
   }
   vpc_id = aws_vpc.cluster.id
 
@@ -17,6 +18,7 @@ resource "aws_subnet" "additional-subnet" {
   timeouts {}
 }
 
+// for managed node? network
 resource "aws_subnet" "cluster-subnet" {
   count                = length(var.cluster-subnet)
   cidr_block           = element(concat(var.cluster-subnet, [""]), count.index)
@@ -26,10 +28,10 @@ resource "aws_subnet" "cluster-subnet" {
   map_public_ip_on_launch         = false
   assign_ipv6_address_on_creation = false
   tags = {
-    "Name"                                      = format("Private%s", count.index + 1)
+    "Name"                                      = format("%s-private-%s", var.cluster-name, count.index + 1)
     "kubernetes.io/cluster/${var.cluster-name}" = "shared"
     "kubernetes.io/role/internal-elb"           = "1"
-    "workshop"                                  = format("subnet-p%s", count.index + 1)
+    "workshop"                                  = format("subnet-private-%s", count.index + 1)
   }
   vpc_id = aws_vpc.cluster.id
 
