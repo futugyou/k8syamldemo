@@ -29,7 +29,15 @@ variable "additional-subnet" {
 }
 
 data "aws_availability_zones" "available" {}
-
 locals {
   azs = data.aws_availability_zones.available.names
+}
+
+data "aws_region" "current" {}
+
+
+variable "endpoint-list" {
+  description = "endpoint list"
+  type        = list(string)
+  default     = ["autoscaling", "ec2", "ec2messages", "ecr.api", "ecr.dkr", "elasticloadbalancing", "logs", "ssm", "ssmmessages", "sts"]
 }
