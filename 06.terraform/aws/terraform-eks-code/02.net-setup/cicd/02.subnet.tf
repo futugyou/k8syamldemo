@@ -24,6 +24,7 @@ resource "aws_subnet" "cicd-subnet-public" {
   availability_zone_id = length(regexall("^[a-z]{2}-", element(local.azs, count.index))) == 0 ? element(local.azs, count.index) : null
 
   assign_ipv6_address_on_creation = false
+  map_public_ip_on_launch         = false
   tags = {
     "Name"     = format("cicd-public%s", count.index + 1)
     "workshop" = format("cicd-public%s", count.index + 1)
