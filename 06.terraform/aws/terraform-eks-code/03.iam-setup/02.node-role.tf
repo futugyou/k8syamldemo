@@ -1,4 +1,4 @@
-resource "aws_iam_role" "eks-cluster-service-role" {
+resource "aws_iam_role" "eks-cluster-node-role" {
   assume_role_policy = jsonencode(
     {
       Statement = [
@@ -6,10 +6,7 @@ resource "aws_iam_role" "eks-cluster-service-role" {
           Action = "sts:AssumeRole"
           Effect = "Allow"
           Principal = {
-            Service = [
-              "eks-fargate-pods.amazonaws.com",
-              "eks.amazonaws.com",
-            ]
+            Service = "ec2.amazonaws.com"
           }
         },
       ]
@@ -18,9 +15,9 @@ resource "aws_iam_role" "eks-cluster-service-role" {
   )
   force_detach_policies = false
   max_session_duration  = 3600
-  name                  = "eks-cluster-service-role"
+  name                  = "eks-cluster-node-role"
   path                  = "/"
   tags = {
-    "Name" = "eks-cluster/ServiceRole"
+    "Name" = "eks-cluster-nodegroup/NodeRole"
   }
-}
+} 
