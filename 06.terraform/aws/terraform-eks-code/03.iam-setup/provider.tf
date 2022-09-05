@@ -1,14 +1,5 @@
 provider "aws" {
   region = var.region
-
-  s3_use_path_style           = true
-  skip_credentials_validation = true
-  skip_metadata_api_check     = true
-  skip_requesting_account_id  = true
-
-  endpoints {
-    iam = "http://localhost:4566"
-  }
 }
 
 terraform {
@@ -16,5 +7,12 @@ terraform {
     aws = {
       version = "~> 4.21.0"
     }
+  }
+  backend "s3" {
+    bucket         = "tf-state-ip-172-31-3-99-1610534831592022427"
+    key            = "terraform/terraform_locks_iam.tfstate"
+    region         = var.region
+    dynamodb_table = "terraform_locks_iam"
+    encrypt        = "true"
   }
 }
