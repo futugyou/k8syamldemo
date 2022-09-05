@@ -9,3 +9,11 @@ data "aws_vpc" "vpc-cicd" {
     values = [var.cicd-vpc-name]
   }
 }
+
+data "aws_vpc" "vpc-eks" {
+  default = false
+  filter {
+    name   = "tag:name"
+    values = [var.cluster-vpc-name]
+  }
+}
