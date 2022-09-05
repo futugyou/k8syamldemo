@@ -6,7 +6,7 @@ localstack start
 localstack status services
 ```
 
-###  [tflocal ](https://docs.localstack.cloud/integrations/terraform/)
+###  [tflocal](https://docs.localstack.cloud/integrations/terraform/)
 ```
 pip install terraform-local
 tflocal init
