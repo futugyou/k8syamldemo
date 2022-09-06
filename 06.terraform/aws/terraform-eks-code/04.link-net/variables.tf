@@ -1,3 +1,9 @@
+variable "default_region" {
+  description = "cluster region"
+  type        = string
+  default     = "ap-southeast-1"
+}
+
 variable "cicd-vpc-name" {
   description = "cicd vpc name"
   type        = string
@@ -13,5 +19,5 @@ variable "cluster-vpc-name" {
 variable "cloud9-label" {
   description = "Cloud9 IDE Name Label"
   type        = string
-  default     = "eks-terraform"
+  default     = "terraform-eks"
 }

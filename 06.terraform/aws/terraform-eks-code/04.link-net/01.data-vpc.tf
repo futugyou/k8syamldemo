@@ -13,7 +13,7 @@ data "aws_vpc" "vpc-cicd" {
 data "aws_vpc" "vpc-eks" {
   default = false
   filter {
-    name   = "tag:name"
+    name   = "tag:Name"
     values = [var.cluster-vpc-name]
   }
 }
