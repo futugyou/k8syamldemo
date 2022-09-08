@@ -1,5 +1,5 @@
 resource "aws_launch_template" "node-template" {
-  instance_type          = "m5a.large"
+  instance_type          = var.ec2_instance_type
   key_name               = aws_key_pair.eksworkshop.key_name
   name                   = format("%s-%s-lt", var.cluster-name, var.node-group-name)
   tags                   = {}

@@ -23,3 +23,9 @@ variable "cluster_version" {
   type        = string
   default     = "1.23"
 }
+
+variable "ec2_instance_type" {
+  description = "ec2 instance type"
+  type        = string
+  default     = "t3a.medium"
+}
