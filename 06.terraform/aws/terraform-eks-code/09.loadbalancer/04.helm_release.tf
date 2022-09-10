@@ -19,7 +19,7 @@ resource "helm_release" "aws-load-balancer-controller" {
 
   set {
     name  = "image.repository"
-    value = format("%s.dkr.ecr.%s.amazonaws.com/amazon/aws-load-balancer-controller", data.aws_caller_identity.current.account_id, var.default_region)
+    value = format("602401143452.dkr.ecr.%s.amazonaws.com/amazon/aws-load-balancer-controller", var.default_region)
   }
 
   set {
