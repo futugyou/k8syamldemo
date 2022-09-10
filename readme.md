@@ -15,3 +15,9 @@ vi /etc/profile
 add 'export KUBECONFIG=/etc/kubernetes/admin.conf'
 source /etc/profile 
 ```
+
+### some code
+```
+kubectl get nodes -o json | jq .items[].metadata.annotations
+kubectl get pods -A -o wide | grep coredns
+```
