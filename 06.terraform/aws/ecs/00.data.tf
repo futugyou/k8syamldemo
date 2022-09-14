@@ -16,3 +16,10 @@ data "aws_subnets" "private_subnet" {
     values = [format("%s*", var.subnets_prefix)]
   }
 }
+
+data "aws_vpc" "ecs_vpc" {
+  filter {
+    name   = "tag:Name"
+    values = [var.vpc_tag]
+  }
+}

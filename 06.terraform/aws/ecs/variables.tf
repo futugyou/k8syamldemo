@@ -69,3 +69,15 @@ variable "subnets_prefix" {
   type        = string
   default     = "private-1"
 }
+
+variable "vpc_tag" {
+  description = "vpc tag"
+  type        = string
+  default     = "default"
+}
+
+variable "cloud_map_name" {
+  description = "cloud map name"
+  type        = string
+  default     = "terraform.local"
+}

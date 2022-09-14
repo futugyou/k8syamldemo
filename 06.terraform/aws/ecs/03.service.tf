@@ -3,7 +3,6 @@ resource "aws_ecs_service" "service" {
   cluster         = aws_ecs_cluster.ecs.id
   task_definition = aws_ecs_task_definition.task.arn
 
-
   deployment_maximum_percent         = "200"
   deployment_minimum_healthy_percent = "100"
   desired_count                      = 1
@@ -27,5 +26,15 @@ resource "aws_ecs_service" "service" {
     assign_public_ip = "false"
     security_groups  = [data.aws_security_group.ecs_security.id]
     subnets          = data.aws_subnets.private_subnet.ids
+  }
+
+  lifecycle {
+    ignore_changes = [desired_count]
+  }
+
+  service_registries {
+    container_port = "0"
+    port           = "0"
+    registry_arn   = aws_service_discovery_service.discovery_service.arn
   }
 }
