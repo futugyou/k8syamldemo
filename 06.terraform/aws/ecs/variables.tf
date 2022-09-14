@@ -43,7 +43,7 @@ variable "otel_config_name" {
 variable "task_image_name" {
   description = "task image name"
   type        = string
-  default     = "383796595686.dkr.ecr.ap-southeast-1.amazonaws.com/oneapp-apigateway:28a55e3a0ea0254f5fa78c25573f0754ba6c049b"
+  default     = "ngnix"
 }
 
 variable "deploy_env" {
