@@ -1,6 +1,11 @@
 resource "aws_ecs_cluster" "ecs" {
   name = var.ecs_name
 
+  setting {
+    name  = "containerInsights"
+    value = "disabled"
+  }
+
   tags = {
     "name" = var.ecs_name
   }

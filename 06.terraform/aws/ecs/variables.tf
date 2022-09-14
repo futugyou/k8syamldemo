@@ -51,3 +51,21 @@ variable "deploy_env" {
   type        = string
   default     = "Dev"
 }
+
+variable "service_name" {
+  description = "service name"
+  type        = string
+  default     = "identity-tf"
+}
+
+variable "security_group_name" {
+  description = "security group name"
+  type        = string
+  default     = "onecloud-ecs"
+}
+
+variable "subnets_prefix" {
+  description = "subnets prefix"
+  type        = string
+  default     = "private-1"
+}

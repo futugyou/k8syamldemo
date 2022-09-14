@@ -26,8 +26,9 @@ resource "aws_ecs_task_definition" "task" {
       logConfiguration = {
         logDriver = "awslogs"
         options = {
-          awslogs-group         = format("ecs/%s", var.task_definition_name)
+          awslogs-group         = format("/ecs/%s", var.task_definition_name)
           awslogs-region        = var.default_region
+          awslogs-create-group  = "true"
           awslogs-stream-prefix = "ecs"
         }
       }
@@ -48,6 +49,7 @@ resource "aws_ecs_task_definition" "task" {
         options = {
           awslogs-group         = format("/ecs/%s", var.task_definition_name)
           awslogs-region        = var.default_region
+          awslogs-create-group  = "true"
           awslogs-stream-prefix = "ecs"
         }
       }
