@@ -37,4 +37,10 @@ resource "aws_ecs_service" "service" {
     port           = "0"
     registry_arn   = aws_service_discovery_service.discovery_service.arn
   }
+
+  load_balancer {
+    container_name   = var.service_name
+    container_port   = "80"
+    target_group_arn = data.aws_lb_target_group.target_group.arn
+  }
 }

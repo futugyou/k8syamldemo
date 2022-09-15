@@ -23,3 +23,7 @@ data "aws_vpc" "ecs_vpc" {
     values = [var.vpc_tag]
   }
 }
+
+data "aws_lb_target_group" "target_group" {
+  name = var.service_name
+}
