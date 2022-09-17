@@ -1,6 +1,6 @@
-resource "aws_lambda_function" "test_lambda" {
-  # If the file is not in the current working directory you will need to include a
-  # path.module in the filename.
+resource "aws_lambda_function" "golang_lambda" {
+  layers = [aws_lambda_layer_version.lambda_layer.arn]
+
   filename      = "./golambdademo/main.zip"
   function_name = var.lambda_name
   role          = aws_iam_role.iam_for_lambda.arn
