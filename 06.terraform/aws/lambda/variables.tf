@@ -9,3 +9,9 @@ variable "lambda_iam_role" {
   type        = string
   default     = "iam_for_lambda"
 }
+
+variable "lambda_name" {
+  description = "lambda name"
+  type        = string
+  default     = "lambda_golang_function"
+}
