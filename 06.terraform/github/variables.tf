@@ -17,3 +17,9 @@ variable "issue_labels" {
     "waiting-reply" = "CC6A14"
   }
 }
+
+variable "webhook_url" {
+  description = "webhook url"
+  type        = string
+  default     = ""
+}

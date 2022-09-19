@@ -334,3 +334,4 @@ ASALocalRun/
 *.backup
 .terraform/
 *.zip
+*.tfvars
