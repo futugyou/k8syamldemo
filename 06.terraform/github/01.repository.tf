@@ -48,3 +48,18 @@ resource "github_issue_label" "apigateway" {
   name       = element(keys(var.issue_labels), count.index)
   color      = element(values(var.issue_labels), count.index)
 }
+
+
+resource "github_repository" "public_repo" {
+  name                   = "public_repo_demo"
+  visibility             = "public"
+  allow_auto_merge       = false
+  allow_merge_commit     = true
+  allow_rebase_merge     = false
+  allow_squash_merge     = false
+  has_issues             = true
+  delete_branch_on_merge = true
+  auto_init              = true
+  gitignore_template     = "VisualStudio"
+  license_template       = "mit"
+}
