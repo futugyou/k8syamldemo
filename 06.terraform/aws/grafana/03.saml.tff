@@ -1,0 +1,5 @@
+resource "aws_grafana_workspace_saml_configuration" "saml" {
+  editor_role_values = ["editor"]
+  idp_metadata_url   = ""
+  workspace_id       = aws_grafana_workspace.workspace.id
+}

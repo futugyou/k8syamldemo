@@ -1,0 +1,5 @@
+resource "aws_grafana_role_association" "role_association" {
+  role         = "ADMIN"
+  user_ids     = var.grafana_users
+  workspace_id = aws_grafana_workspace.workspace.id
+}

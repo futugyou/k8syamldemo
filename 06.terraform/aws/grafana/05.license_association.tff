@@ -1,0 +1,4 @@
+resource "aws_grafana_license_association" "license" {
+  license_type = "ENTERPRISE_FREE_TRIAL"
+  workspace_id = aws_grafana_workspace.workspace.id
+}
