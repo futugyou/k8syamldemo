@@ -19,7 +19,7 @@ variable "cluster_name" {
 variable "cluster_version" {
   description = "Version of Cluster"
   type        = string
-  default     = "1.22"
+  default     = "1.23"
 }
 
 variable "cluster_role_name" {
