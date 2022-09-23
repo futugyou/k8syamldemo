@@ -10,6 +10,12 @@ variable "cluster_name" {
   default     = "eks-osim-dev"
 }
 
+variable "cluster_version" {
+  description = "cluster version"
+  type        = string
+  default     = "1.23"
+}
+
 variable "nginx_version" {
   description = "nginx chart version"
   type        = string
