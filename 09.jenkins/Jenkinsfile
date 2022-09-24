@@ -1,0 +1,38 @@
+pipeline {
+    agent any
+
+    options {
+	        skipDefaultCheckout true
+	    }
+        
+    stages {
+        stage('init') {
+            steps {
+                sh 'terraform version'
+                sh 'echo terraform {} >>./terraformdemo.tf'
+                sh 'terraform init'
+            }
+        }
+        stage('validate') {
+            steps {
+                sh("terraform validate")
+            }
+        }
+        stage('apply') {
+            steps {
+                sh("terraform apply")
+            }
+        }
+        stage('docker') {
+            when { branch('master') }
+            steps {
+                sh 'docker info'
+            }
+        }
+        stage('golang') {
+            steps {
+                sh 'go env'
+            }
+        }
+    }
+}
