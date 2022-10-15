@@ -10,6 +10,12 @@ kafka-console-producer.sh --broker-list localhost:9092 --topic mykafka
 kafka-console-consumer.sh --bootstrap-server  localhost:9092 --topic mykafka --from-beginning
 ```
 
+######  kafka docker compose
+```
+git clone https://github.com/conduktor/kafka-stack-docker-compose.git
+docker-compose -f zk-single-kafka-single.yml up -d
+```
+
 ######  rabbitmq
 ```
 docker run -itd --hostname Terraform --name AbpEventMQ -e RABBITMQ_DEFAULT_USER=user -e RABBITMQ_DEFAULT_PASS=password  -p 15672:15672 -p 5672:5672 rabbitmq:3-management

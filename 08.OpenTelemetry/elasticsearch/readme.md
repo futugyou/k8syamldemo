@@ -1,3 +1,5 @@
+### [official doc](https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html#docker-compose-file)
+
 ####### https://www.cnblogs.com/huaweiyun/p/14870066.html
 
 ```
@@ -11,7 +13,7 @@ kubectl -s http://ip:port create -f es-service.yaml
 https://github.com/mobz/elasticsearch-head
 ```
 
-####### Cerebro£¨kopf£©Component
+####### Cerebroï¿½ï¿½kopfï¿½ï¿½Component
 ```
 https://github.com/lmenezes/cerebro
 ```
