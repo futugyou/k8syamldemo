@@ -1,25 +1,41 @@
-variable "github_token" {
-  description = "github token"
+variable "realm_id" {
+  description = "realm id"
   type        = string
-  default     = ""
+  default     = "master"
 }
 
-variable "organization" {
-  description = "organization"
+variable "username" {
+  description = "username"
   type        = string
-  default     = ""
+  default     = "testuser"
+} 
+
+variable "email" {
+  description = "email"
+  type        = string
+  default     = "testuser@hotmail.com"
+} 
+
+variable "first_name" {
+  description = "first name"
+  type        = string
+  default     = "Alice"
 }
 
-variable "issue_labels" {
-  default = {
-    "custom-label"  = "533D99"
-    "documentation" = "FFB340"
-    "waiting-reply" = "CC6A14"
-  }
+variable "last_name" {
+  description = "last name"
+  type        = string
+  default     = "Aliceberg"
 }
 
-variable "webhook_url" {
-  description = "webhook url"
+variable "github_username" {
+  description = "github username"
   type        = string
-  default     = ""
+  default     = "testuser"
 }
+
+variable "department" {
+  description = "department"
+  type        = string
+  default     = "amazon"
+} 
