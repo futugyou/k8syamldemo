@@ -33,7 +33,22 @@ resource "aws_iam_policy" "policy" {
           "dynamodb:GetItem",
           "dynamodb:Query",
           "dynamodb:Scan",
-          "dynamodb:PartiQLSelect"
+          "dynamodb:PartiQLSelect",
+          "xray:GetSamplingRules",
+          "xray:GetSamplingTargets",
+          "xray:GetSamplingStatisticSummaries",
+          "xray:BatchGetTraces",
+          "xray:GetServiceGraph",
+          "xray:GetTraceGraph",
+          "xray:GetTraceSummaries",
+          "xray:GetGroups",
+          "xray:GetGroup",
+          "xray:ListTagsForResource",
+          "xray:GetTimeSeriesServiceStatistics",
+          "xray:GetInsightSummaries",
+          "xray:GetInsight",
+          "xray:GetInsightEvents",
+          "xray:GetInsightImpactGraph"
         ]
         Effect   = "Allow"
         Resource = "*"
