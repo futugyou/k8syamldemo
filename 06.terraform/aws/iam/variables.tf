@@ -18,3 +18,8 @@ variable "group_name" {
   type    = string
   default = "view-Developers"
 }
+
+variable "user_name" {
+  type    = string
+  default = "view-user@osim.com.sg"
+}
