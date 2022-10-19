@@ -1,8 +1,15 @@
 terraform {
+  backend "s3" {
+    bucket         = "terraform-eks-code"
+    key            = "terraform/terraform_locks_iam2.tfstate"
+    dynamodb_table = "terraform_locks"
+    region         = "ap-southeast-1"
+  }
+
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = ">= 4.27.0"
+      version = ">= 4.35.0"
     }
   }
 
