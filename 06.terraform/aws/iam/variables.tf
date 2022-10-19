@@ -13,3 +13,8 @@ variable "xray_policy_name" {
   type    = string
   default = "xraysidecar"
 }
+
+variable "group_name" {
+  type    = string
+  default = "view-Developers"
+}
