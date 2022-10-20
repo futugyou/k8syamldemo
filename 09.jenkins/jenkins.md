@@ -42,3 +42,19 @@ if use TLS  see create_tls_certs.sh
 
 Config ssh
 ```
+
+### AWS EC2 
+```
+outlook email 
+SMTP server: smtp.office365.com 
+Default user e-mail suffix: @domain.com
+User Name: notification@domain.com
+Password: ###########
+Use SSL: no
+SMTP Port: 25 or 587
+Charset UTF-8
+
+sudo vi /etc/sysconfig/jenkins 
+JENKINS_JAVA_OPTIONS="-Djava.awt.headless=true -Dmail.smtp.starttls.enable=true"
+JENKINS_ARGS="-Dmail.smtp.starttls.enable=true"
+```

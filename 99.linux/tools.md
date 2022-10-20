@@ -46,3 +46,18 @@ vi /etc/hosts
 jobs -l
 kill pid
 ```
+
+
+### error: mbed TLS libraries not found
+```shell
+wget https://tls.mbed.org/download/mbedtls-2.16.3-gpl.tgz
+or
+wget https://down.24kplus.com/linux/mbedtls/mbedtls-2.16.3-gpl.tgz
+tar -xf mbedtls-2.16.3-gpl.tgz
+cd mbedtls-2.16.3
+
+make
+make DESTDIR=/usr install
+ldconfig
+
+```
