@@ -1,0 +1,12 @@
+apiVersion: webapp.demo.welcome.domain/v1
+kind: Welcome
+metadata:
+  labels:
+    app.kubernetes.io/name: welcome
+    app.kubernetes.io/instance: welcome-sample
+    app.kubernetes.io/part-of: welcome
+    app.kuberentes.io/managed-by: kustomize
+    app.kubernetes.io/created-by: welcome
+  name: welcome-sample
+spec:
+  # TODO(user): Add fields here
