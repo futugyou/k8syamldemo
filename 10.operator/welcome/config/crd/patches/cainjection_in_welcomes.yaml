@@ -5,3 +5,7 @@ metadata:
   annotations:
     cert-manager.io/inject-ca-from: $(CERTIFICATE_NAMESPACE)/$(CERTIFICATE_NAME)
   name: welcomes.webapp.demo.welcome.domain
+  versions:
+  - name: v1alpha1
+    served: true
+    storage: true

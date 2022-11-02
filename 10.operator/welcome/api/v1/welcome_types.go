@@ -29,7 +29,8 @@ type WelcomeSpec struct {
 	// Important: Run "make" to regenerate code after modifying this file
 
 	// Foo is an example field of Welcome. Edit welcome_types.go to remove/update
-	Foo string `json:"foo,omitempty"`
+	// Foo string `json:"foo,omitempty"`
+	Name string `json:"name,omitempty"`
 }
 
 // WelcomeStatus defines the observed state of Welcome
