@@ -20,4 +20,8 @@ source /etc/profile
 ```
 kubectl get nodes -o json | jq .items[].metadata.annotations
 kubectl get pods -A -o wide | grep coredns
+
+kubectl api-versions
+kubectl api-resources
+返回GVR信息
 ```

@@ -30,3 +30,28 @@ make run
 make uninstall
 make undeploy
 ```
+
+### 
+```
+client-go 四种client， 
+基类 restclient, 
+clientset 只能获取内置资源，不能获取crd，discoveryclient
+DynamicClient 可获取全部资源
+discoveryclient 获取现有所有资源 版本
+
+```
+
+### client-go arch
+```
+1. Reflector 使用List-watch监控特定资源对象，获取增量信息存入DeltaFIFO。
+2. DeltaFIFO 增量队列
+3. LocalStore informer读取DeltaFIFO后创建本地缓存的地方
+4. workqueue 缓存创建后（同步后）DeltaFIFO会pop事件到controller，调用ResourceEventHandler回调函数（OnAdd，OnUpdate，OnDelete），最后放入workqueue
+5. work通过client操作k8s
+```
+
+### DiscoveryClient
+```
+CachedDiscoveryClient 缓存至~/.kube/cache
+memCacheClient 缓存至~/.kube/http-cache
+```
