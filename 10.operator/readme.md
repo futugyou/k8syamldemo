@@ -55,3 +55,22 @@ discoveryclient 获取现有所有资源 版本
 CachedDiscoveryClient 缓存至~/.kube/cache
 memCacheClient 缓存至~/.kube/http-cache
 ```
+
+### List-Watch
+```
+watch使用了HTTP…分块传输编码Chunked Transfer Encoding
+server返回Chunked，客户端收到Chunked后保持链接，等待下一个数据块
+HTTP/1.1 200 OK
+Content-Type: application/json
+Transfer-Encoding: chunked
+
+1. List 获取资源数据，同步到DeltaFIFO队列
+2. 定时同步 定时触发Resync，将Indexer中的资源对象同步到DeltaFIFO队列
+3. Watch 监听资源变化 调用相应事件处理函数
+```
+
+### Informer
+```
+Informer 执行watch操作（包括CRD），核心模块Reflector、DeltaFIFO、Indexer
+
+```
