@@ -71,13 +71,13 @@ Transfer-Encoding: chunked
 
 ### Informer
 ```
-Informer 执行watch操作（包括CRD），核心模块Reflector、DeltaFIFO、Indexer
+Informer 执行list-watch操作（包括CRD），核心模块Reflector、DeltaFIFO、Indexer
 ```
 
-### Reflctor
+### Reflctor tools\cache\reflector.go
 ```
-List流程 tools\cache\reflector.go List
-1. 获取资源下所有对象数据
+List流程  List
+1. r.listerWatcher.List(opts) 获取资源下所有对象数据
 2. GetResourceVersion 
 3. ExtractList 将runtime.Object => []runtime.Object
 4. syncWith 将资源对象和版本号存入DeltaFIFO
@@ -87,4 +87,12 @@ Watch流程 tools\cache\reflector.go
 1. r.listerWatcher.Watch(options) tools\cache\listwatch.go watchfunc 长链接
 2. watchHandler 更新watch.Added/Modified/Deleted/Bookmark 事件的资源， 存入DeltaFIFO
 3. setLastSyncResourceVersion
+```
+
+### DeltaFIFO tools\cache\delta_fifo.go
+```
+1. 仅处理对象一次
+2. 处理完当前版本才能处理后续
+3. 删除对象不处理
+4. 不能周期性重新处理对象
 ```
