@@ -56,7 +56,7 @@ CachedDiscoveryClient 缓存至~/.kube/cache
 memCacheClient 缓存至~/.kube/http-cache
 ```
 
-### List-Watch
+### List-Watch tools\cache\reflector.go ListAndWatch
 ```
 watch使用了HTTP…分块传输编码Chunked Transfer Encoding
 server返回Chunked，客户端收到Chunked后保持链接，等待下一个数据块
@@ -72,5 +72,19 @@ Transfer-Encoding: chunked
 ### Informer
 ```
 Informer 执行watch操作（包括CRD），核心模块Reflector、DeltaFIFO、Indexer
+```
 
+### Reflctor
+```
+List流程 tools\cache\reflector.go List
+1. 获取资源下所有对象数据
+2. GetResourceVersion 
+3. ExtractList 将runtime.Object => []runtime.Object
+4. syncWith 将资源对象和版本号存入DeltaFIFO
+5. setLastSyncResourceVersion
+
+Watch流程 tools\cache\reflector.go
+1. r.listerWatcher.Watch(options) tools\cache\listwatch.go watchfunc 长链接
+2. watchHandler 更新watch.Added/Modified/Deleted/Bookmark 事件的资源， 存入DeltaFIFO
+3. setLastSyncResourceVersion
 ```
