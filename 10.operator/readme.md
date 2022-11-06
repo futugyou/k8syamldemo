@@ -96,3 +96,12 @@ Watch流程 tools\cache\reflector.go
 3. 删除对象不处理
 4. 不能周期性重新处理对象
 ```
+
+### Indexer 一个本地储存 tools\cache\index.go
+```
+shared_informer.Run() => controller.Run() => NewReflector => controller.processLoop() =>
+Queue.Pop() => PopProcessFunc(c.config.Process) => sharedIndexInformer.HandleDeltas() => controller.processDeltas
+DeltaFIFO pop出来的对象到了HandleDeltas()中转为Deltas，再交由controller.processDeltas()处理
+
+indexer => cache => threadSafeMap
+```
