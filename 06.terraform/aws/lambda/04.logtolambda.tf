@@ -21,7 +21,7 @@ resource "aws_lambda_function" "log_group_lambda" {
 
 resource "aws_cloudwatch_log_subscription_filter" "demo_logfilter" {
   name            = "demo_logfilter"
-  depends_on = [aws_lambda_permission.allow_cloudwatch]
+  depends_on      = [aws_lambda_permission.allow_cloudwatch]
   log_group_name  = aws_cloudwatch_log_group.log_group_for_lambda.name
   filter_pattern  = "{ $.LogLevel = \"Error\" }"
   destination_arn = aws_lambda_function.log_group_lambda.arn
