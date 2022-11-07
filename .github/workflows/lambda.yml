@@ -5,13 +5,13 @@ on:
   push:
     paths:
     - 06.terraform/aws/lambda/**
-    - .github/lambda.yml
+    - .github/workflows/lambda.yml
   pull_request:
     branches:
     - master
     paths:
     - 06.terraform/aws/lambda/**
-    - .github/lambda.yml
+    - .github/workflows/lambda.yml
 
 permissions:
   contents: read
