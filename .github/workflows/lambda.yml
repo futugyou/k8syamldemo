@@ -49,7 +49,7 @@ jobs:
       continue-on-error: true
     
     - name: replace 
-      run: sed -i 's#default     = "ap-southeast-1"#default     = "${{env.region}}"#g' /variables.tf
+      run: sed -i 's#default     = "ap-southeast-1"#default     = "${{env.region}}"#g' ./variables.tf
       working-directory: ${{env.working-directory}}
 
     # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
