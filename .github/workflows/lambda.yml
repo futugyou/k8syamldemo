@@ -85,6 +85,7 @@ jobs:
     
       - name: publish  output file
         run: aws s3 sync ${{env.outputfiledir}} ${{ env.outputfiled3 }}
+        working-directory: ${{env.working-directory}}
 
       - name: Terraform Delete
         # Delete resource after apply
