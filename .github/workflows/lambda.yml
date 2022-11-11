@@ -23,6 +23,8 @@ jobs:
     env:
       working-directory: ./06.terraform/aws/lambda
       region: ap-southeast-1
+      outputfiled3: s3://terraform-eks-code/upload/
+      outputfiledir: ./upload
     # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
     defaults:
       run:
@@ -74,6 +76,12 @@ jobs:
         # On push to "master", build or change infrastructure according to Terraform configuration files
         # Note: It is recommended to set up a required "strict" status check in your repository for "Terraform Cloud". See the documentation on "strict" required status checks for more information: https://help.github.com/en/github/administering-a-repository/types-of-required-status-checks
       - name: Terraform Apply
-        if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+        # if: github.ref == 'refs/heads/master' && github.event_name == 'push'
         run: terraform apply -auto-approve -input=false
         working-directory: ${{env.working-directory}}
+
+      - name: delete output file
+        run: aws s3 rm ${{ env.outputfiled3 }} --recursive
+    
+      - name: publish  output file
+        run: aws s3 sync ${{env.outputfiledir}} ${{ env.s3-path }}
