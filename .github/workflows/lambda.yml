@@ -84,4 +84,9 @@ jobs:
         run: aws s3 rm ${{ env.outputfiled3 }} --recursive
     
       - name: publish  output file
-        run: aws s3 sync ${{env.outputfiledir}} ${{ env.s3-path }}
+        run: aws s3 sync ${{env.outputfiledir}} ${{ env.outputfiled3 }}
+
+      - name: Terraform Delete
+        # Delete resource after apply
+        run: terraform destroy -auto-approve -input=false
+        working-directory: ${{env.working-directory}}
