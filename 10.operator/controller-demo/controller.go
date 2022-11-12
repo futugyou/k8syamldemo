@@ -37,7 +37,7 @@ func (c *Controller) Run(threadiness int, stopCh chan struct{}) {
 	go c.informer.Run(stopCh)
 	// 等待缓存同步队列
 	if !cache.WaitForCacheSync(stopCh, c.informer.HasSynced) {
-		runtime.HandleError(fmt.Errorf("Time out waitng for caches to sync"))
+		runtime.HandleError(fmt.Errorf("time out waitng for caches to sync"))
 		return
 	}
 	// 启动多个 Worker 线程处理 Workqueue 中的 Object
