@@ -105,3 +105,16 @@ DeltaFIFO pop出来的对象到了HandleDeltas()中转为Deltas，再交由contr
 
 indexer => cache => threadSafeMap
 ```
+
+### Transport： 对RoundTripper的包装 transport\transport.go
+```
+1. Set transport level security
+include CA/CertAuth/CertCallback/TLS
+2. get RoundTripper from config or cache 
+3. 5 types RoundTripper
+- 1. debuggingRoundTripper
+- 2. bearerAuthRoundTripper
+- 3. basicAuthRoundTripper
+- 4. userAgentRoundTripper
+- 5. impersonatingRoundTripper
+```
