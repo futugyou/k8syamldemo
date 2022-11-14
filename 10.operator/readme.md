@@ -185,4 +185,14 @@ user(restapi/client/serviceAccount) -> 认证 -> 授权 -> 准入控制(不包�
 2. KubeAPIServer 负责处理内置资源， e.g. pod.deployment.service...
 3. AggregatorServer 负责将用户的请求转发给单独部署的各个 APIServer
 
+### kubebuilder
+1. manager 负责初始化controller、cache、client
+2. cache 负责生成SharedInformer，watch关注的GVK下的GVR的变化，以触发Controller的Reconcile逻辑
+3. client 对资源进行CURD，写操作直接访问APIServer，读操作访问本地cache
+4. finalizers 处理k8s预删除逻辑，保障资源被删除后能从cache里读到，清理相关其他资源
 
+### kubebuilder arch (./kubebuilder.JPG)
+1. user defined
+2. api scaffolds
+3. controller runtime
+4. k8s
