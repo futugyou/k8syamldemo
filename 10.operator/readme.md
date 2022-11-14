@@ -1,4 +1,7 @@
-###
+<p align="center">
+	<img width="450" src="./client-go.JPG" alt="client-go arch">
+</p>
+
 ```
 Operator 的运行机制是作为自定义扩展资源注册到
 Controller Manager，通过 List-Watch 的方式监听对应资源的变化，然后在周期内的
@@ -6,6 +9,11 @@ Controller Manager，通过 List-Watch 的方式监听对应资源的变化，�
 ```
 
 ### kubeoperator
+
+<p align="center">
+	<img width="450" src="./kubebuilderarch.JPG" alt="kubeoperator">
+</p>
+
 ```
 https://go.kubebuilder.io/introduction.html
 
@@ -42,6 +50,10 @@ discoveryclient 获取现有所有资源 版本
 ```
 
 ### client-go arch
+<p align="center">
+	<img width="450" src="./client-go2.JPG" alt="client-go arch">
+</p>
+
 1. Reflector 使用List-watch监控特定资源对象，获取增量信息存入DeltaFIFO。
 2. DeltaFIFO 增量队列
 3. LocalStore informer读取DeltaFIFO后创建本地缓存的地方
@@ -191,7 +203,11 @@ user(restapi/client/serviceAccount) -> 认证 -> 授权 -> 准入控制(不包�
 3. client 对资源进行CURD，写操作直接访问APIServer，读操作访问本地cache
 4. finalizers 处理k8s预删除逻辑，保障资源被删除后能从cache里读到，清理相关其他资源
 
-### kubebuilder arch (./kubebuilder.JPG)
+### kubebuilder arch
+<p align="center">
+	<img width="450" src="./kubebuilder.JPG" alt="kubebuilder arch">
+</p>
+
 1. user defined
 2. api scaffolds
 3. controller runtime
