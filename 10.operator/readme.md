@@ -1,5 +1,5 @@
 <p align="center">
-	<img width="450" src="./client-go.JPG" alt="client-go arch">
+	<img src="./client-go.JPG" alt="client-go arch">
 </p>
 
 ```
@@ -11,7 +11,7 @@ Controller Manager，通过 List-Watch 的方式监听对应资源的变化，�
 ### kubeoperator
 
 <p align="center">
-	<img width="450" src="./kubebuilderarch.JPG" alt="kubeoperator">
+	<img src="./kubebuilderarch.JPG" alt="kubeoperator">
 </p>
 
 ```
@@ -51,7 +51,7 @@ discoveryclient 获取现有所有资源 版本
 
 ### client-go arch
 <p align="center">
-	<img width="450" src="./client-go2.JPG" alt="client-go arch">
+	<img src="./client-go2.JPG" alt="client-go arch">
 </p>
 
 1. Reflector 使用List-watch监控特定资源对象，获取增量信息存入DeltaFIFO。
@@ -205,10 +205,58 @@ user(restapi/client/serviceAccount) -> 认证 -> 授权 -> 准入控制(不包�
 
 ### kubebuilder arch
 <p align="center">
-	<img width="450" src="./kubebuilder.JPG" alt="kubebuilder arch">
+	<img src="./kubebuilder.JPG" alt="kubebuilder arch">
 </p>
 
 1. user defined
 2. api scaffolds
 3. controller runtime
 4. k8s
+
+### controller-runtime
+<p align="center">
+	<img src="./controller-runtime.JPG" alt="controller-runtime">
+</p>
+
+1. clien 用于读写k8s资源对象的客户端
+2. cache 保存需要监听的k8s资源，缓存只读客户端
+3. manager 控制多个controller，提供controller共用的依赖项，eg. client、cache、schemes...
+4. controller 响应k8s事件，确保spec字段的状态与系统状态匹配，如不匹配则通过reconciler同步
+5. reconciler 提供同步功能
+6. webhook 准入webhook包含变更准入和验证准入
+7. source 提供k8s事件流
+8. eventhandler 用于将事件对应的reconcile.Request加入队列
+9. predicate 用于过滤事件
+
+### controller-runtime workflow
+<p align="center">
+	<img src="./controller-runtime-workflow.JPG" alt="controller-runtime-workflow">
+</p>
+
+#### 以podcontroller为例
+1. source 通过APIserver监听pod对象，提供pod事件
+2. eventhandler 根据pod事件 将reconcile.Request加入队列
+3. 从队列获取reconcile.Request，并调用Reconciler进行同步
+
+### manager 
+1. 接口 pkg/manager/manager.go 
+2. 创建 pkg/manager/internal.go
+3. 实现 ControllerManager
+ 
+### controller 
+1. 接口 pkg/controller/controller.go
+2. 创建 pkg/builder/controller.go
+3. 实现 pkg/internal/controller/controller.go 
+4.  Controller.Start() workflow
+<p align="center">
+	<img src="./controller-start.JPG" alt="controller-start">
+</p>
+
+### Reconciler 
+1. 接口 pkg/reconcile/reconcile.go
+### Predicate 
+1. 接口 pkg/predicate/predicate.go
+### EventHandler 
+1. 接口 pkg/handler/eventhandler.go
+### Source 
+1. 接口 pkg/source/source.go
