@@ -111,7 +111,7 @@ include CA/CertAuth/CertCallback/TLS
 	4. userAgentRoundTripper
 	5. impersonatingRoundTripper
 
-### kube apiserver
+### kube apiserver auth workflow
 ```
 user(restapi/client/serviceAccount) -> 认证 -> 授权 -> 准入控制(不包括只读) -> write -> ETCD
 ```
@@ -176,3 +176,13 @@ user(restapi/client/serviceAccount) -> 认证 -> 授权 -> 准入控制(不包�
 	19. StorageObjectInUseProtection 保护正在使用的 PV 和 PVC 不被删除
 	20. TaintNodesByCondition 将新创建的 Node 标记为 NotReady 和NoSche dule
 	21. ValidatingAdmissionWebhook 使用 WebHook 验证请求和用户提交资源的信息
+
+### k8s apiserver 添加自定义资源的方式
+1. CRD
+2. Aggregation 可以让用户开发部署单独的APIServer来实现自定义资源
+### k8s apiserver 提供3中服务对应CRD和Aggregation
+1. APIExtensionsServer 处理CRD和CR的rest请求
+2. KubeAPIServer 负责处理内置资源， e.g. pod.deployment.service...
+3. AggregatorServer 负责将用户的请求转发给单独部署的各个 APIServer
+
+
