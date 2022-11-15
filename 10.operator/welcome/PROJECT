@@ -1,7 +1,8 @@
 domain: demo.welcome.domain
 layout:
 - go.kubebuilder.io/v3
-projectName: welcome
+multigroup: true
+projectName: demo
 repo: github.com/futugyou/operator/welcome
 resources:
 - api:
@@ -12,5 +13,14 @@ resources:
   group: webapp
   kind: Welcome
   path: github.com/futugyou/operator/welcome/api/v1
+  version: v1
+- api:
+    crdVersion: v1
+    namespaced: true
+  controller: true
+  domain: demo.welcome.domain
+  group: batch
+  kind: CronJob
+  path: github.com/futugyou/operator/welcome/apis/batch/v1
   version: v1
 version: "3"

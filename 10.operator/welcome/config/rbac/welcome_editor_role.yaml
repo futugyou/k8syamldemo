@@ -6,8 +6,8 @@ metadata:
     app.kubernetes.io/name: clusterrole
     app.kubernetes.io/instance: welcome-editor-role
     app.kubernetes.io/component: rbac
-    app.kubernetes.io/created-by: welcome
-    app.kubernetes.io/part-of: welcome
+    app.kubernetes.io/created-by: demo
+    app.kubernetes.io/part-of: demo
     app.kubernetes.io/managed-by: kustomize
   name: welcome-editor-role
 rules:

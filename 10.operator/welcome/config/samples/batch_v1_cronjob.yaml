@@ -1,12 +1,12 @@
-apiVersion: webapp.demo.welcome.domain/v1
-kind: Welcome
+apiVersion: batch.demo.welcome.domain/v1
+kind: CronJob
 metadata:
   labels:
-    app.kubernetes.io/name: welcome
-    app.kubernetes.io/instance: welcome-sample
+    app.kubernetes.io/name: cronjob
+    app.kubernetes.io/instance: cronjob-sample
     app.kubernetes.io/part-of: demo
     app.kuberentes.io/managed-by: kustomize
     app.kubernetes.io/created-by: demo
-  name: welcome-sample
+  name: cronjob-sample
 spec:
   # TODO(user): Add fields here

@@ -1,27 +1,31 @@
-# permissions for end users to view welcomes.
+# permissions for end users to edit cronjobs.
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
   labels:
     app.kubernetes.io/name: clusterrole
-    app.kubernetes.io/instance: welcome-viewer-role
+    app.kubernetes.io/instance: cronjob-editor-role
     app.kubernetes.io/component: rbac
     app.kubernetes.io/created-by: demo
     app.kubernetes.io/part-of: demo
     app.kubernetes.io/managed-by: kustomize
-  name: welcome-viewer-role
+  name: cronjob-editor-role
 rules:
 - apiGroups:
-  - webapp.demo.welcome.domain
+  - batch.demo.welcome.domain
   resources:
-  - welcomes
+  - cronjobs
   verbs:
+  - create
+  - delete
   - get
   - list
+  - patch
+  - update
   - watch
 - apiGroups:
-  - webapp.demo.welcome.domain
+  - batch.demo.welcome.domain
   resources:
-  - welcomes/status
+  - cronjobs/status
   verbs:
   - get
