@@ -33,10 +33,10 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/healthz"
 	"sigs.k8s.io/controller-runtime/pkg/log/zap"
 
-	webappv1 "github.com/futugyou/operator/welcome/api/v1"
 	batchv1 "github.com/futugyou/operator/welcome/apis/batch/v1"
-	"github.com/futugyou/operator/welcome/controllers"
+	webappv1 "github.com/futugyou/operator/welcome/apis/webapp/v1"
 	batchcontrollers "github.com/futugyou/operator/welcome/controllers/batch"
+	controllers "github.com/futugyou/operator/welcome/controllers/webapp"
 	//+kubebuilder:scaffold:imports
 )
 

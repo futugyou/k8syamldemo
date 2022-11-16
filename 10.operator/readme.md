@@ -25,6 +25,8 @@ cd demo
 go mod init github.com/futugyou/operator/welcome
 kubebuilder init --domain demo.welcome.domain --repo github.com/futugyou/operator/welcome
 kubebuilder create api --group webapp --kind Welcome --version v1
+kubebuilder create api --group batch  --kind CronJob --version v1 
+
 kubebuilder edit --multigroup=true
 
 make install

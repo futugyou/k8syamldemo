@@ -19,7 +19,7 @@ package controllers
 import (
 	"context"
 
-	webappv1 "github.com/futugyou/operator/welcome/api/v1"
+	webappv1 "github.com/futugyou/operator/welcome/apis/webapp/v1"
 	appsv1 "k8s.io/api/apps/v1"
 	corev1 "k8s.io/api/core/v1"
 	"k8s.io/apimachinery/pkg/api/resource"

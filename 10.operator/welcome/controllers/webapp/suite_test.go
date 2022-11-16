@@ -30,7 +30,7 @@ import (
 	logf "sigs.k8s.io/controller-runtime/pkg/log"
 	"sigs.k8s.io/controller-runtime/pkg/log/zap"
 
-	webappv1 "github.com/futugyou/operator/welcome/api/v1"
+	webappv1 "github.com/futugyou/operator/welcome/apis/webapp/v1"
 	//+kubebuilder:scaffold:imports
 )
 
