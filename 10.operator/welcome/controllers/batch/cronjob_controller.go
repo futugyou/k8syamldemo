@@ -254,8 +254,29 @@ func (r *CronJobReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ct
 
 // SetupWithManager sets up the controller with the Manager.
 func (r *CronJobReconciler) SetupWithManager(mgr ctrl.Manager) error {
+	// set up a real clock, since we are not in a test
+	if r.Clock == nil {
+		r.Clock = realClock{}
+	}
+
+	if err := mgr.GetFieldIndexer().IndexField(context.Background(), &kbatch.Job{}, jobOwnerKey, func(o client.Object) []string {
+		job := o.(*kbatch.Job)
+		owner := metav1.GetControllerOf(job)
+		if owner == nil {
+			return nil
+		}
+
+		if owner.APIVersion != apiGVStr || owner.Kind != "CronJob" {
+			return nil
+		}
+		return []string{owner.Name}
+	}); err != nil {
+		return err
+	}
+
 	return ctrl.NewControllerManagedBy(mgr).
 		For(&batchv1.CronJob{}).
+		Owns(&kbatch.Job{}).
 		Complete(r)
 }
 
@@ -284,7 +305,7 @@ func getScheduledTimeForJob(job *kbatch.Job) (*time.Time, error) {
 func getNextSchedule(cronJob *batchv1.CronJob, now time.Time) (lastMissed time.Time, next time.Time, err error) {
 	sched, err := cron.ParseStandard(cronJob.Spec.Schedule)
 	if err != nil {
-		return time.Time{}, time.Time{}, fmt.Errorf("Unparseable schedule %q: %v", cronJob.Spec.Schedule, err)
+		return time.Time{}, time.Time{}, fmt.Errorf("unparseable schedule %q: %v", cronJob.Spec.Schedule, err)
 	}
 
 	var earliestTime time.Time
@@ -311,7 +332,8 @@ func getNextSchedule(cronJob *batchv1.CronJob, now time.Time) (lastMissed time.T
 		lastMissed = t
 		starts++
 		if starts > 100 {
-			return time.Time{}, time.Time{}, fmt.Errorf("Too many missed start times (> 100). Set or decrease .spec.startingDeadlineSeconds or check clock skew.")
+			return time.Time{}, time.Time{},
+				fmt.Errorf("too many missed start times (> 100). Set or decrease .spec.startingDeadlineSeconds or check clock skew. ")
 		}
 	}
 
