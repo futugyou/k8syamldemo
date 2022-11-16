@@ -24,18 +24,35 @@ mkdir demo
 cd demo
 go mod init github.com/futugyou/operator/welcome
 kubebuilder init --domain demo.welcome.domain --repo github.com/futugyou/operator/welcome
-kubebuilder create api --group webapp --kind Welcome --version v1
-kubebuilder create api --group batch  --kind CronJob --version v1 
-
 kubebuilder edit --multigroup=true
+kubebuilder create api --group webapp --kind Welcome --version v1
+kubebuilder create api --group batch  --kind CronJob --version v1
+```
 
+after etid CRDs
+```
+make manifests
+```
+
+Install the CRDs into the cluster: 
+```
 make install
-kubectl create -f config/crd/patches/
-kubectl create -f config/samples/webapp_v1_welcome.yaml
+```
+
+Install Instances of CR:
+```
+kubectl apply -f config/crd/patches/  ??
+kubectl apply -f config/samples
+```
+
+Check:
+```
 kubectl get crd
 kubectl get welcome
+```
 
-make manifests
+Run your controller:
+```
 make run
 
 make uninstall
