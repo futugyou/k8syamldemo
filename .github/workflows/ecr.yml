@@ -2,17 +2,17 @@ name: "ecr"
 
 on:
   workflow_call:
-  workflow_dispatch:
-  push:
-    paths:
-      - 06.terraform/aws/ecr/**
-      - .github/workflows/ecr.yml
-  pull_request:
-    branches:
-      - master
-    paths:
-      - 06.terraform/aws/ecr/**
-      - .github/workflows/ecr.yml
+  # workflow_dispatch:
+  # push:
+  #   paths:
+  #     - 06.terraform/aws/ecr/**
+  #     - .github/workflows/ecr.yml
+  # pull_request:
+  #   branches:
+  #     - master
+  #   paths:
+  #     - 06.terraform/aws/ecr/**
+  #     - .github/workflows/ecr.yml
 
 permissions:
   contents: read
