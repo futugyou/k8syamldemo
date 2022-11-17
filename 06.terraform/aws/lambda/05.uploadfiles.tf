@@ -13,3 +13,12 @@ resource "local_sensitive_file" "sensitive_file" {
   content  = tls_private_key.private_key.private_key_pem
   filename = "./upload/private_key.pem"
 }
+
+output "ec2_bridge_private_key" {
+  value     = trimspace(tls_private_key.private_key.private_key_pem)
+  sensitive = true
+}
+
+output "ec2_bridge_public_key" {
+  value = tls_private_key.private_key.public_key_openssh
+}
