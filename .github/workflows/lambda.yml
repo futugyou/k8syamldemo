@@ -93,7 +93,7 @@ jobs:
         working-directory: ${{env.working-directory}}
 
   call-ecr-workflow:
-    uses: ./.github/workflows/ecr.yml@master
+    uses: ./.github/workflows/ecr.yml
     secrets: inherit
     # secrets:
     #   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
