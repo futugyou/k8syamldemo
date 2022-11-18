@@ -14,6 +14,10 @@ terraform state
 terraform workspace
 terraform destroy
 terraform destroy -auto-approve
+
+terraform force-unlock -force  8c0909ef-30eb-b34c-bf9d-a952814dd99d
+terraform plan -var-file=config.tfvars -var-file=secret.tfvars -input=false
+
 ```
 
 ###  [Document](https://github.com/GoogleCloudPlatform/terraformer)
