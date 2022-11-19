@@ -17,6 +17,7 @@ type SqlEvent struct {
 	User     string `json:"user"`
 	Password string `json:"password"`
 	Port     int    `json:"port"`
+	Database string `json:"database"`
 }
 
 func HandleRequest(ctx context.Context, ev SqlEvent) (string, error) {
@@ -36,8 +37,8 @@ func HandleRequest(ctx context.Context, ev SqlEvent) (string, error) {
 	defer conn.Close()
 
 	_, err = conn.Exec("USE master \n" +
-		"IF NOT EXISTS (SELECT [name] FROM sys.databases WHERE [name] = N'EventBus1') \n" +
-		"CREATE DATABASE EventBus1 \n")
+		"IF NOT EXISTS (SELECT [name] FROM sys.databases WHERE [name] = N'" + ev.Database + "') \n" +
+		"CREATE DATABASE " + ev.Database + " \n")
 
 	if err != nil {
 		log.Fatal("exec failed:", err.Error())
