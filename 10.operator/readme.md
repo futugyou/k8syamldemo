@@ -56,6 +56,7 @@ kubectl get welcome
 Run your controller:
 ```
 make run
+make run ENABLE_WEBHOOKS=false
 
 make uninstall
 make undeploy
