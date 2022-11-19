@@ -5,4 +5,6 @@ set GOARCH=amd64
 set CGO_ENABLED=0
 go build -o main main.go
 %USERPROFILE%\Go\bin\build-lambda-zip.exe -o main.zip main
+
+i think only linux os can success...
 ```
