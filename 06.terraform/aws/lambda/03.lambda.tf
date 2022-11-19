@@ -7,14 +7,18 @@ resource "aws_lambda_function" "golang_lambda" {
   handler       = "main"
 
   runtime = "go1.x"
+}
 
-  environment {
-    variables = {
-      server   = "thisfortest"
-      user     = "user"
-      password = "password"
-      port     = 111
-      database = ""
-    }
-  }
+data "aws_lambda_invocation" "call_lambda" {
+  function_name = aws_lambda_function.golang_lambda.function_name
+
+  input = <<JSON
+{
+  "server": "thisfortest",
+  "user": "user",
+  "password": "password",
+  "port": 111,
+  "database": ""
+}
+JSON
 }
