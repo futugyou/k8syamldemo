@@ -27,4 +27,12 @@ resources:
     defaulting: true
     validation: true
     webhookVersion: v1
+- api:
+    crdVersion: v1
+    namespaced: true
+  domain: demo.welcome.domain
+  group: batch
+  kind: CronJob
+  path: github.com/futugyou/operator/welcome/apis/batch/v2
+  version: v2
 version: "3"

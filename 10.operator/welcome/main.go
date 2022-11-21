@@ -34,6 +34,7 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/log/zap"
 
 	batchv1 "github.com/futugyou/operator/welcome/apis/batch/v1"
+	batchv2 "github.com/futugyou/operator/welcome/apis/batch/v2"
 	webappv1 "github.com/futugyou/operator/welcome/apis/webapp/v1"
 	batchcontrollers "github.com/futugyou/operator/welcome/controllers/batch"
 	controllers "github.com/futugyou/operator/welcome/controllers/webapp"
@@ -50,6 +51,7 @@ func init() {
 
 	utilruntime.Must(webappv1.AddToScheme(scheme))
 	utilruntime.Must(batchv1.AddToScheme(scheme))
+	utilruntime.Must(batchv2.AddToScheme(scheme))
 	//+kubebuilder:scaffold:scheme
 }
 
