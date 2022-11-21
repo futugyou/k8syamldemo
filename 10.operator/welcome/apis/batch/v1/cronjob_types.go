@@ -86,7 +86,9 @@ type CronJobStatus struct {
 
 //+kubebuilder:object:root=true
 //+kubebuilder:subresource:status
+//+kubebuilder:storageversion
 
+// storageversion is mark for k8s apiserver uses to store our data when we have multi-version
 // CronJob is the Schema for the cronjobs API
 type CronJob struct {
 	metav1.TypeMeta   `json:",inline"`
