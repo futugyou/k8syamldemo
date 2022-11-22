@@ -9,8 +9,10 @@ import (
 	v1 "github.com/futugyou/operator/welcome/apis/batch/v1"
 )
 
+// +kubebuilder:docs-gen:collapse=Imports
+
 // ConvertTo converts this CronJob to the Hub version (v1).
-func (src *CronJob) ConverTo(dstRaw conversion.Hub) error {
+func (src *CronJob) ConvertTo(dstRaw conversion.Hub) error {
 	dst := dstRaw.(*v1.CronJob)
 
 	sched := src.Spec.Schedule
@@ -48,6 +50,7 @@ func (src *CronJob) ConverTo(dstRaw conversion.Hub) error {
 	dst.Status.Active = src.Status.Active
 	dst.Status.LastScheduleTime = src.Status.LastScheduleTime
 
+	// +kubebuilder:docs-gen:collapse=rote conversion
 	return nil
 }
 
@@ -87,5 +90,6 @@ func (dst *CronJob) ConvertFrom(srcRaw conversion.Hub) error {
 	dst.Status.Active = src.Status.Active
 	dst.Status.LastScheduleTime = src.Status.LastScheduleTime
 
+	// +kubebuilder:docs-gen:collapse=rote conversion
 	return nil
 }

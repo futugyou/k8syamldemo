@@ -41,6 +41,7 @@ make manifests
 Install the CRDs into the cluster: 
 ```
 make install
+make install deploy
 ```
 
 Install Instances of CR:

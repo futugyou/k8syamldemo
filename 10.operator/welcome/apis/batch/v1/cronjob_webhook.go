@@ -63,7 +63,7 @@ func (r *CronJob) Default() {
 }
 
 // TODO(user): change verbs to "verbs=create;update;delete" if you want to enable deletion validation.
-//+kubebuilder:webhook:path=/validate-batch-demo-welcome-domain-v1-cronjob,mutating=false,failurePolicy=fail,sideEffects=None,groups=batch.demo.welcome.domain,resources=cronjobs,verbs=create;update,versions=v1,name=vcronjob.kb.io,admissionReviewVersions=v1
+// +kubebuilder:webhook:path=/validate-batch-demo-welcome-domain-v1-cronjob,mutating=false,failurePolicy=fail,sideEffects=None,groups=batch.demo.welcome.domain,resources=cronjobs,verbs=create;update;delete,versions=v1,name=vcronjob.kb.io,admissionReviewVersions=v1
 
 var _ webhook.Validator = &CronJob{}
 
@@ -122,3 +122,5 @@ func (r *CronJob) validateCronJobName() *field.Error {
 	}
 	return nil
 }
+
+// +kubebuilder:docs-gen:collapse=Existing Defaulting and Validation
