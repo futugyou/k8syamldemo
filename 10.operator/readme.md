@@ -29,6 +29,7 @@ kubebuilder create api --group webapp --kind Welcome --version v1
 kubebuilder create api --group batch  --kind CronJob --version v1
 kubebuilder create api --group batch  --kind CronJob --version v2 
 kubebuilder create webhook --group batch --version v1 --kind CronJob --defaulting --programmatic-validation
+kubebuilder create webhook --group batch --version v1 --kind CronJob --conversion
 
 ```
 
