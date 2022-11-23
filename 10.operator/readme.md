@@ -31,6 +31,8 @@ kubebuilder create api --group batch  --kind CronJob --version v2
 kubebuilder create webhook --group batch --version v1 --kind CronJob --defaulting --programmatic-validation
 kubebuilder create webhook --group batch --version v1 --kind CronJob --conversion
 
+kubebuilder create api --group config --version v2 --kind ProjectConfig --resource --controller=false --make=false
+
 ```
 
 after etid CRDs

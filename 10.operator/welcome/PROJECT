@@ -38,4 +38,12 @@ resources:
   webhooks:
     conversion: true
     webhookVersion: v1
+- api:
+    crdVersion: v1
+    namespaced: true
+  domain: demo.welcome.domain
+  group: config
+  kind: ProjectConfig
+  path: github.com/futugyou/operator/welcome/apis/config/v2
+  version: v2
 version: "3"
