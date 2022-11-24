@@ -28,8 +28,9 @@ type ConfigDeploymentSpec struct {
 	// INSERT ADDITIONAL SPEC FIELDS - desired state of cluster
 	// Important: Run "make" to regenerate code after modifying this file
 
-	// Foo is an example field of ConfigDeployment. Edit configdeployment_types.go to remove/update
-	Foo string `json:"foo,omitempty"`
+	// Name of an existing ConfigMap in the same namespace, to add to the deployment
+	// +optional
+	ConfigMap string `json:"configMap,omitempty"`
 }
 
 // ConfigDeploymentStatus defines the observed state of ConfigDeployment

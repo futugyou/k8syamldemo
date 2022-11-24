@@ -30,7 +30,7 @@ type SimpleDeploymentSpec struct {
 
 	// The number of replicas that the deployment should have
 	// +optional
-	Replicas *int `json:"replicas,omitempty"`
+	Replicas *int32 `json:"replicas,omitempty"`
 }
 
 // SimpleDeploymentStatus defines the observed state of SimpleDeployment
