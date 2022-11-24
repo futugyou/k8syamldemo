@@ -5,14 +5,14 @@ metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.9.2
   creationTimestamp: null
-  name: welcomes.webapp.demo.welcome.domain
+  name: simpledeployments.apps.demo.welcome.domain
 spec:
-  group: webapp.demo.welcome.domain
+  group: apps.demo.welcome.domain
   names:
-    kind: Welcome
-    listKind: WelcomeList
-    plural: welcomes
-    singular: welcome
+    kind: SimpleDeployment
+    listKind: SimpleDeploymentList
+    plural: simpledeployments
+    singular: simpledeployment
   scope: Namespaced
   versions:
   - name: v1
@@ -27,8 +27,8 @@ spec:
             type: object
           spec:
             properties:
-              name:
-                type: string
+              replicas:
+                type: integer
             type: object
           status:
             type: object

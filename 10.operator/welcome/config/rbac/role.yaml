@@ -11,11 +11,44 @@ rules:
   - deployments
   verbs:
   - create
+  - delete
   - get
   - list
   - patch
   - update
   - watch
+- apiGroups:
+  - apps
+  resources:
+  - deployments/status
+  verbs:
+  - get
+- apiGroups:
+  - apps.demo.welcome.domain
+  resources:
+  - simpledeployments
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - apps.demo.welcome.domain
+  resources:
+  - simpledeployments/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - apps.demo.welcome.domain
+  resources:
+  - simpledeployments/status
+  verbs:
+  - get
+  - patch
+  - update
 - apiGroups:
   - batch
   resources:
