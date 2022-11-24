@@ -31,6 +31,7 @@ import (
 	ref "k8s.io/client-go/tools/reference"
 	ctrl "sigs.k8s.io/controller-runtime"
 	"sigs.k8s.io/controller-runtime/pkg/client"
+	"sigs.k8s.io/controller-runtime/pkg/controller/controllerutil"
 	"sigs.k8s.io/controller-runtime/pkg/log"
 )
 
@@ -85,6 +86,25 @@ func (r *CronJobReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ct
 	if err := r.Get(ctx, req.NamespacedName, &cronJob); err != nil {
 		log.Error(err, "unable to fetch CronJob")
 		return ctrl.Result{}, client.IgnoreNotFound(err)
+	}
+
+	// 1.1 finalizer logic
+	myFinalizerName := "batch.demo.welcome.domain/finalizer"
+	// examine deleteion timestamp to determine if object is under deletion
+	if cronJob.ObjectMeta.DeletionTimestamp.IsZero() {
+		if !controllerutil.ContainsFinalizer(&cronJob, myFinalizerName) {
+			controllerutil.AddFinalizer(&cronJob, myFinalizerName)
+			if err := r.Update(ctx, &cronJob); err != nil {
+				return ctrl.Result{}, err
+			}
+		}
+	} else {
+		if controllerutil.ContainsFinalizer(&cronJob, myFinalizerName) {
+			if err := r.deleteExternalResources(&cronJob); err != nil {
+
+				return ctrl.Result{}, err
+			}
+		}
 	}
 
 	// 2. list all avtive jobs, and update the status
@@ -363,4 +383,13 @@ func constructJobForCronJob(cronJob *batchv1.CronJob, scheduledTime time.Time, r
 		return nil, err
 	}
 	return job, nil
+}
+
+func (r *CronJobReconciler) deleteExternalResources(cronJob *batchv1.CronJob) error {
+	//
+	// delete any external resources associated with the cronJob
+	//
+	// Ensure that delete implementation is idempotent and safe to invoke
+	// multiple times for same object.
+	return nil
 }
