@@ -46,4 +46,13 @@ resources:
   kind: ProjectConfig
   path: github.com/futugyou/operator/welcome/apis/config/v2
   version: v2
+- api:
+    crdVersion: v1
+    namespaced: true
+  controller: true
+  domain: demo.welcome.domain
+  group: apps
+  kind: SimpleDeployment
+  path: github.com/futugyou/operator/welcome/apis/apps/v1
+  version: v1
 version: "3"

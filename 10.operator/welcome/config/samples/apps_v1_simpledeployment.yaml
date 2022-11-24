@@ -1,0 +1,12 @@
+apiVersion: apps.demo.welcome.domain/v1
+kind: SimpleDeployment
+metadata:
+  labels:
+    app.kubernetes.io/name: simpledeployment
+    app.kubernetes.io/instance: simpledeployment-sample
+    app.kubernetes.io/part-of: demo
+    app.kuberentes.io/managed-by: kustomize
+    app.kubernetes.io/created-by: demo
+  name: simpledeployment-sample
+spec:
+  # TODO(user): Add fields here

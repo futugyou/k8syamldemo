@@ -33,10 +33,12 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/healthz"
 	"sigs.k8s.io/controller-runtime/pkg/log/zap"
 
+	appsv1 "github.com/futugyou/operator/welcome/apis/apps/v1"
 	batchv1 "github.com/futugyou/operator/welcome/apis/batch/v1"
 	batchv2 "github.com/futugyou/operator/welcome/apis/batch/v2"
 	configv2 "github.com/futugyou/operator/welcome/apis/config/v2"
 	webappv1 "github.com/futugyou/operator/welcome/apis/webapp/v1"
+	appscontrollers "github.com/futugyou/operator/welcome/controllers/apps"
 	batchcontrollers "github.com/futugyou/operator/welcome/controllers/batch"
 	controllers "github.com/futugyou/operator/welcome/controllers/webapp"
 	//+kubebuilder:scaffold:imports
@@ -54,6 +56,7 @@ func init() {
 	utilruntime.Must(batchv1.AddToScheme(scheme))
 	utilruntime.Must(batchv2.AddToScheme(scheme))
 	utilruntime.Must(configv2.AddToScheme(scheme))
+	utilruntime.Must(appsv1.AddToScheme(scheme))
 	//+kubebuilder:scaffold:scheme
 }
 
@@ -111,6 +114,13 @@ func main() {
 			setupLog.Error(err, "unable to create webhook", "webhook", "CronJob")
 			os.Exit(1)
 		}
+	}
+	if err = (&appscontrollers.SimpleDeploymentReconciler{
+		Client: mgr.GetClient(),
+		Scheme: mgr.GetScheme(),
+	}).SetupWithManager(mgr); err != nil {
+		setupLog.Error(err, "unable to create controller", "controller", "SimpleDeployment")
+		os.Exit(1)
 	}
 	//+kubebuilder:scaffold:builder
 
