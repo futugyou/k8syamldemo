@@ -61,3 +61,27 @@ make DESTDIR=/usr install
 ldconfig
 
 ```
+
+### net namespace
+```
+lsns -t net
+```
+### process namespace
+```
+lsns -t pid
+eg. PID 129889
+```
+### identify namespace
+```
+ip netns identify 129889
+eg. cni-607c5530-b6d8-ba57-420e-a467d7b10c56
+```
+### netns
+```
+ip netns exec cni-607c5530-b6d8-ba57-420e-a467d7b10c56 ip a
+eg. eth0@if17
+```
+### interface info
+```
+ip link | grep -A1 ^17
+```
