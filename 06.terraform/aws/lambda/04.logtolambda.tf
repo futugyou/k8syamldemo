@@ -41,3 +41,23 @@ resource "aws_lambda_permission" "allow_cloudwatch" {
   principal      = "logs.amazonaws.com"
   source_arn     = "${aws_cloudwatch_log_group.log_group_for_lambda.arn}:*"
 }
+
+resource "aws_cloudwatch_event_rule" "event_rule" {
+  name                = "StopInstance"
+  description         = "Stop instances nightly"
+  schedule_expression = "cron(0 1 * * ? *)"
+}
+
+resource "aws_cloudwatch_event_target" "event_target" {
+  target_id = "demo_event_target"
+  arn       = aws_lambda_function.log_group_lambda.arn
+  rule      = aws_cloudwatch_event_rule.event_rule.name
+  
+}
+
+resource "aws_lambda_permission" "allow_cloudwatch" { 
+  principal      = "events.amazonaws.com"
+  action         = "lambda:InvokeFunction"
+  function_name  = aws_lambda_function.log_group_lambda.function_name  
+  source_arn     = aws_cloudwatch_event_rule.event_rule.arn
+}
