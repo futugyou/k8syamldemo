@@ -5,7 +5,9 @@ iptables -t nat -A OUTPUT -d 10.0.0.4 -j DNAT --to-destination 52.230.46.84
 
 ###### export
 ```
+vi /etc/profile
 export PATH=/bin/:$PATH
+source /etc/profile
 ```
 
 ###### tee write 
@@ -84,4 +86,12 @@ eg. eth0@if17
 ### interface info
 ```
 ip link | grep -A1 ^17
+```
+
+### root user
+```
+sudo passwd root
+su root
+vi /etc/ssh/sshd_config
+sudo /sbin/service sshd restart
 ```
