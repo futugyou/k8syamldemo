@@ -1,3 +1,8 @@
+### [kubebuilder doc](https://go.kubebuilder.io/introduction.html)
+
+### [operator demo](https://github.com/futugyou/goproject/tree/master/k8sbuilder)
+###
+
 <p align="center">
 	<img src="./client-go.JPG" alt="client-go arch">
 </p>
@@ -13,61 +18,6 @@ Controller Manager，通过 List-Watch 的方式监听对应资源的变化，�
 <p align="center">
 	<img src="./kubebuilderarch.JPG" alt="kubeoperator">
 </p>
-
-```
-https://go.kubebuilder.io/introduction.html
-
-curl -L -o kubebuilder https://go.kubebuilder.io/dl/latest/$(go env GOOS)/$(go env GOARCH)
-chmod +x kubebuilder && sudo mv kubebuilder /usr/local/bin/
-
-mkdir demo
-cd demo
-go mod init github.com/futugyou/operator/welcome
-kubebuilder init --domain demo.welcome.domain --repo github.com/futugyou/operator/welcome
-kubebuilder edit --multigroup=true
-kubebuilder create api --group webapp --kind Welcome --version v1
-kubebuilder create api --group batch  --kind CronJob --version v1
-kubebuilder create api --group batch  --kind CronJob --version v2 
-kubebuilder create api --group apps --kind SimpleDeployment --version v1
-
-kubebuilder create webhook --group batch --version v1 --kind CronJob --defaulting --programmatic-validation
-kubebuilder create webhook --group batch --version v1 --kind CronJob --conversion
-
-kubebuilder create api --group config --version v2 --kind ProjectConfig --resource --controller=false --make=false
-
-```
-
-after etid CRDs
-```
-make manifests
-```
-
-Install the CRDs into the cluster: 
-```
-make install
-make install deploy
-```
-
-Install Instances of CR:
-```
-kubectl apply -f config/crd/patches/  ??
-kubectl apply -f config/samples
-```
-
-Check:
-```
-kubectl get crd
-kubectl get welcome
-```
-
-Run your controller:
-```
-make run
-make run ENABLE_WEBHOOKS=false
-
-make uninstall
-make undeploy
-```
 
 ### 
 ```
